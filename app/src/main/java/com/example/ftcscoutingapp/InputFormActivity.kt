@@ -8,19 +8,20 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.activity.ComponentActivity
-import com.google.firebase.Firebase
-import com.google.firebase.database.database
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import kotlin.math.max
 import kotlin.math.min
 
 
 private const val TAG = "InputFormActivityTAG"
-class InputFormActivity : ComponentActivity() {
+class InputFormActivity : AppCompatActivity() {
 
-    private lateinit var buttonAdditionButton: Button
-    private lateinit var buttonSubtractionButton: Button
-    private lateinit var textViewNumberDisplay: TextView
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager2: ViewPager2
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
+
     private lateinit var editTextTeamName: EditText
     private lateinit var buttonSendButton: Button
     private lateinit var viewResultsButton: Button
@@ -29,21 +30,72 @@ class InputFormActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inputformlayout)
 
-        buttonAdditionButton = findViewById(R.id.additionButton)
-        buttonSubtractionButton = findViewById(R.id.subtractionButton)
-        textViewNumberDisplay = findViewById(R.id.numberDisplay)
+        tabLayout = findViewById(R.id.inputFormTabLayout)
+        viewPager2 = findViewById(R.id.inputFormViewPager)
+        viewPagerAdapter = ViewPagerAdapter(this)
+
+        viewPager2.adapter = viewPagerAdapter
+
+        tabLayout.addOnTabSelectedListener(
+            object: TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(p0: TabLayout.Tab?) {
+                    if (p0?.position == null) {
+                        throw NullPointerException()
+                    }
+                    viewPager2.setCurrentItem(p0.position)
+
+                }
+
+                override fun onTabUnselected(p0: TabLayout.Tab?) {
+
+                }
+
+                override fun onTabReselected(p0: TabLayout.Tab?) {
+
+                }
+            }
+        )
+
+        viewPager2.registerOnPageChangeCallback(
+            object: ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    tabLayout.getTabAt(position)?.select()
+                }
+            }
+        )
+
+
         editTextTeamName = findViewById(R.id.teamName)
         buttonSendButton = findViewById(R.id.sendButton)
         viewResultsButton = findViewById(R.id.switchToResults)
-
 
         buttonSendButton.setOnClickListener(
             object: View.OnClickListener {
                 override fun onClick(v: View?) {
                     val teamName: String = editTextTeamName.text.toString()
-//                    DatabaseHandler.writeMatchResultToDataBase(IntoTheDeepResults(), teamName)
 
+                    val opModeInputForm: OpmodeInputForm = viewPagerAdapter.opmodeFragment
+                    val autonomousInputForm: AutonomousInputForm = viewPagerAdapter.autonomousFragment
 
+                    DatabaseHandler.writeMatchResultToDataBase(
+                        IntoTheDeepResults(
+                            autonomousInputForm.getInputModuleValue("Net Samples"),
+                            autonomousInputForm.getInputModuleValue("Low Basket"),
+                            autonomousInputForm.getInputModuleValue("High Basket"),
+                            autonomousInputForm.getInputModuleValue("Low Specimens"),
+                            autonomousInputForm.getInputModuleValue("High Specimens"),
+                            opModeInputForm.getInputModuleValue("Net Samples"),
+                            opModeInputForm.getInputModuleValue("Low Basket"),
+                            opModeInputForm.getInputModuleValue("High Basket"),
+                            opModeInputForm.getInputModuleValue("Low Specimens"),
+                            opModeInputForm.getInputModuleValue("High Specimens"),
+                            opModeInputForm.getAscentLevel()
+                        ),
+                        teamName)
+
+                    opModeInputForm.reset()
+                    autonomousInputForm.reset()
 
                     editTextTeamName.text.clear()
                 }
@@ -65,12 +117,12 @@ class InputFormActivity : ComponentActivity() {
 class SingleInputModule(subtractionButton: Button, additionButton: Button, var numberDisplay: TextView, val minValue: Int = 0, val maxValue: Int = 20, initialValue: Int = 0) {
     var numberValue: Int = initialValue
         set(value) {
-            numberValue = value
-            numberValue = max(minValue, numberValue)
-            numberValue = min(maxValue, numberValue)
-            numberDisplay.text = "$numberValue"
+            field = min(max(value, minValue), maxValue)
+            numberDisplay.text = "$value"
         }
     init {
+        numberDisplay.text = "$numberValue"
+
         additionButton.setOnClickListener(
             object: View.OnClickListener {
                 override fun onClick(v: View?) {

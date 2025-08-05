@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OpmodeInputForm">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/inputFormOpmodeNetSamplesDisplay"
+            android:layout_width="64dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.14" />
+
+        <Button
+            android:id="@+id/inputFormOpModeNetSamplesAdditionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeNetSamplesDisplay"
+            app:layout_constraintStart_toEndOf="@+id/inputFormOpmodeNetSamplesDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeNetSamplesDisplay" />
+
+        <Button
+            android:id="@+id/inputFormOpModeNetSamplesSubtractionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeNetSamplesDisplay"
+            app:layout_constraintEnd_toStartOf="@+id/inputFormOpmodeNetSamplesDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeNetSamplesDisplay" />
+
+        <TextView
+            android:id="@+id/inputFormOpmodeNetSamplesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Net Samples"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpmodeNetSamplesDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpmodeNetSamplesDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpmodeNetSamplesDisplay" />
+
+        <TextView
+            android:id="@+id/inputFormOpmodeLowBasketDisplay"
+            android:layout_width="64dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.28" />
+
+        <Button
+            android:id="@+id/inputFormOpModeLowBasketAdditionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeLowBasketDisplay"
+            app:layout_constraintStart_toEndOf="@+id/inputFormOpmodeLowBasketDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeLowBasketDisplay" />
+
+        <Button
+            android:id="@+id/inputFormOpModeLowBasketSubtractionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeLowBasketDisplay"
+            app:layout_constraintEnd_toStartOf="@+id/inputFormOpmodeLowBasketDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeLowBasketDisplay" />
+
+        <TextView
+            android:id="@+id/inputFormOpmodeLowBasketTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Low Basket"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpmodeLowBasketDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpmodeLowBasketDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpmodeLowBasketDisplay" />
+
+
+        <TextView
+            android:id="@+id/inputFormOpmodeHighBasketDisplay"
+            android:layout_width="64dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.44" />
+
+        <Button
+            android:id="@+id/inputFormOpModeHighBasketAdditionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeHighBasketDisplay"
+            app:layout_constraintStart_toEndOf="@+id/inputFormOpmodeHighBasketDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeHighBasketDisplay" />
+
+        <Button
+            android:id="@+id/inputFormOpModeHighBasketSubtractionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeHighBasketDisplay"
+            app:layout_constraintEnd_toStartOf="@+id/inputFormOpmodeHighBasketDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeHighBasketDisplay" />
+
+        <TextView
+            android:id="@+id/inputFormOpmodeHighBasketTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High Basket"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpmodeHighBasketDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpmodeHighBasketDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpmodeHighBasketDisplay" />
+
+
+        <TextView
+            android:id="@+id/inputFormOpmodeLowSpecimensDisplay"
+            android:layout_width="64dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.78"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.14" />
+
+        <Button
+            android:id="@+id/inputFormOpModeLowSpecimensAdditionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeLowSpecimensDisplay"
+            app:layout_constraintStart_toEndOf="@+id/inputFormOpmodeLowSpecimensDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeLowSpecimensDisplay" />
+
+        <Button
+            android:id="@+id/inputFormOpModeLowSpecimensSubtractionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeLowSpecimensDisplay"
+            app:layout_constraintEnd_toStartOf="@+id/inputFormOpmodeLowSpecimensDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeLowSpecimensDisplay" />
+
+        <TextView
+            android:id="@+id/inputFormOpmodeLowSpecimensTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Low Specimens"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpmodeLowSpecimensDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpmodeLowSpecimensDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpmodeLowSpecimensDisplay" />
+
+
+        <TextView
+            android:id="@+id/inputFormOpmodeHighSpecimensDisplay"
+            android:layout_width="64dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.78"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.28" />
+
+        <Button
+            android:id="@+id/inputFormOpModeHighSpecimensAdditionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeHighSpecimensDisplay"
+            app:layout_constraintStart_toEndOf="@+id/inputFormOpmodeHighSpecimensDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeHighSpecimensDisplay" />
+
+        <Button
+            android:id="@+id/inputFormOpModeHighSpecimensSubtractionButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeHighSpecimensDisplay"
+            app:layout_constraintEnd_toStartOf="@+id/inputFormOpmodeHighSpecimensDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeHighSpecimensDisplay" />
+
+        <TextView
+            android:id="@+id/inputFormOpmodeHighSpecimensTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High Specimens"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpmodeHighSpecimensDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpmodeHighSpecimensDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpmodeHighSpecimensDisplay" />
+
+        <RadioGroup
+            android:id="@+id/inputFormOpModeAscentLevelGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpmodeHighBasketDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeHighSpecimensAdditionButton"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeHighSpecimensSubtractionButton"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeHighBasketDisplay"
+            app:layout_constraintVertical_bias="0.25">
+
+            <TextView
+                android:id="@+id/inputFormOpModeAscentLevelTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose Ascent Level" />
+
+            <RadioButton
+                android:id="@+id/inputFormOpModeAscentLevelButtonNone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="None (0p)" />
+
+            <RadioButton
+                android:id="@+id/inputFormOpModeAscentLevelButtonParking"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Parking (3p)" />
+
+            <RadioButton
+                android:id="@+id/inputFormOpModeAscentLevelButtonFirstLevel"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="1st Level (3p)" />
+
+            <RadioButton
+                android:id="@+id/inputFormOpModeAscentLevelButtonSecondLevel"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="2nd Level (15p)" />
+
+            <RadioButton
+                android:id="@+id/inputFormOpModeAscentLevelButtonThirdevel"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="3rd Level (30p)" />
+
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
