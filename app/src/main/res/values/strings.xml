@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FTCScoutingApp</string>
+    <string name="title_activity_view_results">ViewResultsActivity</string>
+    <string name="title_activity_input_form">InputFormActivity</string>
+</resources>
