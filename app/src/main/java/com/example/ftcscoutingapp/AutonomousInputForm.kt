@@ -28,8 +28,8 @@ class AutonomousInputForm : Fragment() {
         return inflated
     }
 
-    fun getInputModuleValue(name: String): Int {
-        return inputModulesMap[name]!!.numberValue
+    fun getInputModuleValue(name: String): Long {
+        return inputModulesMap[name]!!.numberValue.toLong()
     }
 
     fun reset() {

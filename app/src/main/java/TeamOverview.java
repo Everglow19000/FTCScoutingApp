@@ -25,73 +25,19 @@ public class TeamOverview {
             temp[temp.length-1] = match;
             matches = temp;
         }
-
-        public String getBestScoringMethod() {
-            Map<String, Integer> cumulativeScore = new HashMap<>(matches[0].getScoringMethodPointsNoAutonomousMultiplication());
-
-            for (int match = 1; match < matches.length; match++) {
-                Map<String, Integer> scoringMethodPointsNoAuto = matches[match].getScoringMethodPointsNoAutonomousMultiplication();
-                for (
-                        String method :
-                     scoringMethodPointsNoAuto.keySet()
-                ) {
-                    cumulativeScore.put(method, cumulativeScore.getOrDefault(method, 0) + scoringMethodPointsNoAuto.getOrDefault(method, 0));
-                }
-            }
-
-            String bestFound = null;
-            for (
-                    String method :
-                    cumulativeScore.keySet()
-            ) {
-                if (bestFound == null || cumulativeScore.get(method) > cumulativeScore.get(bestFound)) {
-                    bestFound = method;
-                }
-            }
-
-            return bestFound;
-        }
-
-        public double getAverageScore() {
-            int sum = 0;
-            for (int i = 0; i < matches.length; i++) {
-                sum += matches[i].getTotalScore();
-            }
-            return (double)(sum)/(double)(matches.length);
-        }
-
-        public double standardDeviationOfScores() {
-            double average = getAverageScore();
-            double sumOfSquares = 0;
-            for (int i = 0; i < matches.length; i++) {
-                sumOfSquares += Math.pow((matches[i].getTotalScore() - average), 2);
-            }
-            sumOfSquares /= (double)(matches.length);
-            return Math.sqrt(sumOfSquares);
-        }
-
-        public int getMaxScore() {
-            int maxIndex = 0;
-            for (int i = 0; i < matches.length; i++) {
-                if (matches[i].getTotalScore() > matches[maxIndex].getTotalScore()) {
-                    maxIndex = i;
-                }
-            }
-            return matches[maxIndex].getTotalScore();
-        }
-
-        public int getMinScore() {
-            int minIndex = 0;
-            for (int i = 0; i < matches.length; i++) {
-                if (matches[i].getTotalScore() < matches[minIndex].getTotalScore()) {
-                    minIndex = i;
-                }
-            }
-            return matches[minIndex].getTotalScore();
-        }
     }
 
     public ScoreOverview scoreOverview;
 
-    private String teamName;
+    public String teamName;
+
+    public TeamOverview(String teamName, MatchResults[] matches) {
+        this.teamName = teamName;
+        this.scoreOverview = new ScoreOverview(matches);
+    }
+
+    public TeamOverview(String teamName) {
+        this.teamName = teamName;
+        this.scoreOverview = new ScoreOverview(new MatchResults[0]);
+    }
 }

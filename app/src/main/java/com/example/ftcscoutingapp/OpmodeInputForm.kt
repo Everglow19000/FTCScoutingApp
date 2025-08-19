@@ -55,8 +55,8 @@ class OpmodeInputForm : Fragment() {
 
     }
 
-    fun getInputModuleValue(name: String): Int {
-        return inputModulesMap[name]!!.numberValue
+    fun getInputModuleValue(name: String): Long {
+        return inputModulesMap[name]!!.numberValue.toLong()
     }
 
     fun getAscentLevel(): IntoTheDeepResults.AscentLevel {

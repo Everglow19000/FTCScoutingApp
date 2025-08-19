@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.ftcscoutingapp"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -59,6 +59,7 @@ dependencies {
 
     implementation("com.google.android.material:material:1.12.0")
 
+    implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
