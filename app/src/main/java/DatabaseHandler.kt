@@ -94,4 +94,14 @@ object DatabaseHandler {
             workbook.close()
         }
     }
+
+    fun getAvailableYearRanges(): Array<String> {
+        var yearRanges: MutableList<String> = mutableListOf<String>()
+        database.getReference("/").get().addOnSuccessListener {
+            for (child in it.children) {
+                yearRanges.add(child.key.toString())
+            }
+        }
+        return Array(yearRanges.size, {num, -> yearRanges.get(num)})
+    }
 }

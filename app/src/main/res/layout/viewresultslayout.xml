@@ -7,161 +7,28 @@
 
 
     <Button
-        android:id="@+id/switchToInputForm"
+        android:id="@+id/viewResultsDownloadDataButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Input Form"
+        android:text="Download Data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-        app:layout_constraintVertical_bias="0.8" />
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="wrap_content"
-        android:layout_height="450dp"
-        android:minWidth="400dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07999998">
+        app:layout_constraintVertical_bias="0.44" />
 
-        <TableLayout
-            android:id="@+id/resultsTableLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:divider="@color/black"
-            android:orientation="horizontal"
-            android:showDividers="middle|beginning|end">
-
-
-            <TableRow
-                android:id="@+id/teamNames"
-                android:layout_width="173dp"
-                android:layout_height="match_parent"
-                android:divider="@color/black"
-                android:outlineProvider="none"
-                android:showDividers="middle|beginning|end">
-
-                <TextView
-                    android:id="@+id/teamNamesTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="right|center_vertical"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:text="Teams:"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/averageTeamScore"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@color/black"
-                android:outlineProvider="none"
-                android:showDividers="middle|beginning|end">
-
-                <TextView
-                    android:id="@+id/averageTeamScoreTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="right|center_vertical"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:text="Average:"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/maxTeamScore"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@color/black"
-                android:outlineProvider="none"
-                android:showDividers="middle|beginning|end">
-
-                <TextView
-                    android:id="@+id/maxTeamScoreTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="right|center_vertical"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:text="Max:"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/minTeamScore"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@color/black"
-                android:outlineProvider="none"
-                android:showDividers="middle|beginning|end">
-
-                <TextView
-                    android:id="@+id/minTeamScoreTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="right|center_vertical"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:text="Min:"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-            </TableRow>
-        </TableLayout>
-    </HorizontalScrollView>
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
+    <AutoCompleteTextView
+        android:id="@+id/viewResultsYearSelector"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checkedButton="@id/sortAverageScore"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:completionThreshold="0"
+        android:minWidth="175dp"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/viewResultsDownloadDataButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94">
-
-        <RadioButton
-            android:id="@+id/sortAverageScore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Average Score" />
-
-        <RadioButton
-            android:id="@+id/sortMaxScore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Max Score" />
-
-        <RadioButton
-            android:id="@+id/sortMinScore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:duplicateParentState="true"
-            android:text="Min Score" />
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/sortOptions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sort By:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-        app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-        app:layout_constraintStart_toStartOf="@+id/radioGroup" />
+        app:layout_constraintVertical_bias="0.64" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
