@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44" />
+        app:layout_constraintVertical_bias="0.76" />
 
     <Spinner
         android:id="@+id/viewResultsYearSelector"
@@ -28,6 +28,46 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64" />
+        app:layout_constraintVertical_bias="0.95" />
+
+    <Button
+        android:id="@+id/viewResultsSelectStartDateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Start Date"
+        app:layout_constraintBottom_toTopOf="@+id/viewResultsSelectEndDateButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.71000004" />
+
+    <TextView
+        android:id="@+id/viewResultsStartDateDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/viewResultsSelectStartDateButton"
+        app:layout_constraintStart_toStartOf="@+id/viewResultsSelectStartDateButton"
+        app:layout_constraintTop_toBottomOf="@+id/viewResultsSelectStartDateButton" />
+
+    <Button
+        android:id="@+id/viewResultsSelectEndDateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select End Date"
+        app:layout_constraintBottom_toTopOf="@+id/viewResultsYearSelector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81" />
+
+    <TextView
+        android:id="@+id/viewResultsEndDateDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/viewResultsSelectEndDateButton"
+        app:layout_constraintStart_toStartOf="@+id/viewResultsSelectEndDateButton"
+        app:layout_constraintTop_toBottomOf="@+id/viewResultsSelectEndDateButton" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

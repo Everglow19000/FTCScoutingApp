@@ -1,6 +1,7 @@
 import android.os.Environment
 import android.service.autofill.FieldClassification
 import android.util.Log
+import androidx.core.util.Pools
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
 import com.google.firebase.database.getValue
@@ -10,6 +11,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.reflect.Constructor
+import java.text.SimpleDateFormat
+import java.util.Date
 
 const val TAG = "DatabaseHandlerTag"
 object DatabaseHandler {
@@ -34,7 +37,7 @@ object DatabaseHandler {
         databaseNewEntryRef.setValue(match.databaseEntry)
     }
 
-    fun fetchAllResultsFromSeason(yearRange: String) {
+    fun fetchAllResultsFromSeason(yearRange: String, startDate: Date = Date(0), endDate: Date = Date()) {
         val workbook: XSSFWorkbook = XSSFWorkbook()
         val sheet: XSSFSheet = workbook.createSheet("Sheet1")
 
@@ -49,32 +52,38 @@ object DatabaseHandler {
 
             for (team in it.children) {
                 for (timestamp in team.children) {
-                    var currRow: XSSFRow = sheet.createRow(rowNum)
+                    var simpleDateFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                    var date: Date = simpleDateFormat.parse(timestamp.key)
 
-                    var cellNum = 0
+                    if (date.after(startDate) && date.before(endDate)) {
+                        var currRow: XSSFRow = sheet.createRow(rowNum)
 
-                    currRow.createCell(cellNum).setCellValue(team.key)
-                    cellNum++
-                    currRow.createCell(cellNum).setCellValue(timestamp.key)
-                    cellNum++
+                        var cellNum = 0
+
+                        currRow.createCell(cellNum).setCellValue(team.key)
+                        cellNum++
+                        currRow.createCell(cellNum).setCellValue(timestamp.key)
+                        cellNum++
 
 
-                    try {
-                        var matchResults: MatchResults = getMatchResultsClassFromYearRangeAndDatabaseEntry(yearRange, timestamp.getValue() as Map<String, Map<String, Long>>)
+                        try {
+                            var matchResults: MatchResults = getMatchResultsClassFromYearRangeAndDatabaseEntry(yearRange, timestamp.getValue() as Map<String, Map<String, Long>>)
 
-                        for (number in matchResults.scoringMethodsCounts) {
-                            currRow.createCell(cellNum).setCellValue(number.toDouble())
-                            cellNum++
+                            for (number in matchResults.scoringMethodsCounts) {
+                                currRow.createCell(cellNum).setCellValue(number.toDouble())
+                                cellNum++
+                            }
+                            rowNum++
                         }
-                        rowNum++
+                        catch (e: Exception) {
+                            Log.i(TAG, "team that caused exception: ${team.key}")
+                            Log.i(TAG, "timestamp that caused exception: ${timestamp.key}")
+                            Log.i(TAG, "value of timestamp: ${timestamp.value as Map<String, Map<String, Long>>}")
+                            Log.i(TAG, "exception: ${e.toString()}")
+                            Log.i(TAG, "stack trace: ${e.stackTraceToString()}")
+                        }
                     }
-                    catch (e: Exception) {
-                        Log.i(TAG, "team that caused exception: ${team.key}")
-                        Log.i(TAG, "timestamp that caused exception: ${timestamp.key}")
-                        Log.i(TAG, "value of timestamp: ${timestamp.value as Map<String, Map<String, Long>>}")
-                        Log.i(TAG, "exception: ${e.toString()}")
-                        Log.i(TAG, "stack trace: ${e.stackTraceToString()}")
-                    }
+
                 }
             }
 
