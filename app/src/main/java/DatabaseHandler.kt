@@ -48,7 +48,6 @@ object DatabaseHandler {
         database.getReference(yearRange).get().addOnSuccessListener {
 
             for (team in it.children) {
-                Log.i(TAG, "teamName: ${team.key}")
                 for (timestamp in team.children) {
                     var currRow: XSSFRow = sheet.createRow(rowNum)
 
@@ -59,14 +58,11 @@ object DatabaseHandler {
                     currRow.createCell(cellNum).setCellValue(timestamp.key)
                     cellNum++
 
-                    Log.i(TAG, "teamName: ${team.key}, timestamp: ${timestamp.key}")
 
                     try {
                         var matchResults: MatchResults = getMatchResultsClassFromYearRangeAndDatabaseEntry(yearRange, timestamp.getValue() as Map<String, Map<String, Long>>)
-                        Log.i(TAG, matchResults.toString())
 
                         for (number in matchResults.scoringMethodsCounts) {
-                            Log.i(TAG, "Row: $rowNum, Cell: $cellNum, value: ${number.toDouble()}")
                             currRow.createCell(cellNum).setCellValue(number.toDouble())
                             cellNum++
                         }
