@@ -17,12 +17,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.44" />
 
-    <AutoCompleteTextView
+    <Spinner
         android:id="@+id/viewResultsYearSelector"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_weight="1"
-        android:completionThreshold="0"
         android:minWidth="175dp"
         android:text=""
         app:layout_constraintBottom_toTopOf="@+id/viewResultsDownloadDataButton"

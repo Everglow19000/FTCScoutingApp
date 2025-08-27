@@ -69,6 +69,9 @@ object DatabaseHandler {
                         rowNum++
                     }
                     catch (e: Exception) {
+                        Log.i(TAG, "team that caused exception: ${team.key}")
+                        Log.i(TAG, "timestamp that caused exception: ${timestamp.key}")
+                        Log.i(TAG, "value of timestamp: ${timestamp.value as Map<String, Map<String, Long>>}")
                         Log.i(TAG, "exception: ${e.toString()}")
                         Log.i(TAG, "stack trace: ${e.stackTraceToString()}")
                     }
@@ -91,13 +94,17 @@ object DatabaseHandler {
         }
     }
 
-    fun getAvailableYearRanges(): Array<String> {
-        var yearRanges: MutableList<String> = mutableListOf<String>()
-        database.getReference("/").get().addOnSuccessListener {
-            for (child in it.children) {
-                yearRanges.add(child.key.toString())
+    fun getAvailableYearRanges(callback: (Array<String>) -> Unit) {
+        database.getReference("").get().addOnSuccessListener { snapshot ->
+            val yearRanges = mutableListOf<String>()
+            Log.i(TAG, snapshot.children.toString())
+            for (child in snapshot.children) {
+                child.key?.let { yearRanges.add(it) }
             }
+            callback(yearRanges.toTypedArray())
+        }.addOnFailureListener { exception ->
+            Log.e(TAG, "Failed to get year ranges", exception)
+            callback(emptyArray())
         }
-        return Array(yearRanges.size, {num, -> yearRanges.get(num)})
     }
 }
