@@ -14,8 +14,8 @@ import java.lang.reflect.Constructor
 import java.text.SimpleDateFormat
 import java.util.Date
 
-const val TAG = "DatabaseHandlerTag"
 object DatabaseHandler {
+    val TAG = "DatabaseHandlerTag"
     val database = Firebase.database("https://everglowftcscoutingdatabase-default-rtdb.europe-west1.firebasedatabase.app/")
 
     val yearRangesToExcelHeader: MutableMap<String, Array<String>> = mutableMapOf(

@@ -7,22 +7,23 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/inputFormViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="410dp"
+        android:layout_height="600dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.71000004" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/inputFormTabLayout"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/inputFormViewPager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16000003">
+        app:layout_constraintVertical_bias="1.0">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/inputFormOpModeTabItem"
@@ -38,30 +39,51 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <EditText
-        android:id="@+id/teamName"
+    <Spinner
+        android:id="@+id/inputFormCountrySelector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/inputFormTabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <Spinner
+        android:id="@+id/inputFormEventSelector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/inputFormTabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <AutoCompleteTextView
+        android:id="@+id/inputFormTeamNameInput"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:ems="10"
         android:hint="Team Name"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:inputType="textAutoComplete"
+        app:layout_constraintBottom_toBottomOf="@+id/inputFormCountrySelector"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.995"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09" />
+        app:layout_constraintTop_toTopOf="@+id/inputFormCountrySelector" />
 
     <Button
-        android:id="@+id/sendButton"
+        android:id="@+id/inputFormSendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toStartOf="@+id/teamName"
+        app:layout_constraintEnd_toEndOf="@+id/switchToResults"
+        app:layout_constraintStart_toStartOf="@+id/switchToResults"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/switchToResults"
@@ -69,10 +91,10 @@
         android:layout_height="wrap_content"
         android:text="View Results"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/teamName"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintEnd_toEndOf="@+id/inputFormTeamNameInput"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintVertical_bias="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

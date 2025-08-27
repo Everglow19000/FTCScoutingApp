@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.gms.google-services")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -58,6 +59,12 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.1")
 
     implementation("com.google.android.material:material:1.12.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+
+    implementation("com.squareup.okhttp3:okhttp:5.1.0")
+
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.2")
 
     implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation(libs.androidx.core.ktx)

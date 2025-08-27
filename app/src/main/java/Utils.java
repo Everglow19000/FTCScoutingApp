@@ -12,9 +12,10 @@ public class Utils {
     }
 
     public static String getCurrentYearRange() {
-        if (Calendar.getInstance(TimeZone.getTimeZone("UTC")).get(Calendar.MONTH) >= 8) {
-            return Integer.toString(Calendar.getInstance(TimeZone.getTimeZone("UTC")).get(Calendar.YEAR)) + "-" + Integer.toString(Calendar.getInstance(TimeZone.getTimeZone("UTC")).get(Calendar.YEAR)+1);
-        }
-        return Integer.toString(Calendar.getInstance(TimeZone.getTimeZone("UTC")).get(Calendar.YEAR)-1) + "-" + Integer.toString(Calendar.getInstance(TimeZone.getTimeZone("UTC")).get(Calendar.YEAR));
+        return "2024-2025";
+    }
+
+    public static String getCurrentYear() {
+        return "2024";
     }
 }
