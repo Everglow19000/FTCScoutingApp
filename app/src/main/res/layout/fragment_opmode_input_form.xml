@@ -21,7 +21,7 @@
             app:layout_constraintHorizontal_bias="0.22"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.28" />
+            app:layout_constraintVertical_bias="0.1" />
 
         <Button
             android:id="@+id/inputFormOpModeNetSamplesAdditionButton"
@@ -62,7 +62,7 @@
             app:layout_constraintHorizontal_bias="0.22"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.44" />
+            app:layout_constraintVertical_bias="0.5" />
 
         <Button
             android:id="@+id/inputFormOpModeLowBasketAdditionButton"
@@ -104,7 +104,7 @@
             app:layout_constraintHorizontal_bias="0.22"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.58" />
+            app:layout_constraintVertical_bias="0.9" />
 
         <Button
             android:id="@+id/inputFormOpModeHighBasketAdditionButton"
@@ -146,7 +146,7 @@
             app:layout_constraintHorizontal_bias="0.78"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.28" />
+            app:layout_constraintVertical_bias="0.1" />
 
         <Button
             android:id="@+id/inputFormOpModeLowSpecimensAdditionButton"
@@ -188,7 +188,7 @@
             app:layout_constraintHorizontal_bias="0.78"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.44" />
+            app:layout_constraintVertical_bias="0.5" />
 
         <Button
             android:id="@+id/inputFormOpModeHighSpecimensAdditionButton"
@@ -226,7 +226,7 @@
             app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeHighSpecimensAdditionButton"
             app:layout_constraintStart_toStartOf="@+id/inputFormOpModeHighSpecimensSubtractionButton"
             app:layout_constraintTop_toTopOf="@+id/inputFormOpmodeHighBasketDisplay"
-            app:layout_constraintVertical_bias="0.25">
+            app:layout_constraintVertical_bias="0.925">
 
             <TextView
                 android:id="@+id/inputFormOpModeAscentLevelTitle"

@@ -8,7 +8,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/inputFormViewPager"
         android:layout_width="410dp"
-        android:layout_height="600dp"
+        android:layout_height="450dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.35000002" />
 
     <Spinner
         android:id="@+id/inputFormEventSelector"
@@ -59,7 +59,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <AutoCompleteTextView
         android:id="@+id/inputFormTeamNameInput"
@@ -72,7 +72,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.995"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/inputFormCountrySelector" />
+        app:layout_constraintTop_toTopOf="@+id/inputFormCountrySelector"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/inputFormSendButton"
