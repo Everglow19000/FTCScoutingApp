@@ -66,10 +66,15 @@ class InputFormActivity : AppCompatActivity() {
     }
 
     suspend fun updateTeamNames() {
-        teamNamesList.clear()
-        teamNamesList.addAll(FTCApiHandlerInstance!!.getTeamsInEvent(Utils.getCurrentYear(), selectedEventCode).sorted())
+        val temp = FTCApiHandlerInstance!!.getTeamsInEvent(Utils.getCurrentYear(), selectedEventCode).sorted()
+
+        teamNamesArrayAdapter.clear()
+        teamNamesArrayAdapter.addAll(temp)
         teamNamesArrayAdapter.notifyDataSetChanged()
-        Log.i(TAG, "teams: ${teamNamesList.toTypedArray().contentToString()}")
+
+        teamNamesList.clear()
+        teamNamesList.addAll(temp)
+
         editTextTeamName.setText("")
     }
 

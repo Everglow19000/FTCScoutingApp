@@ -143,12 +143,14 @@ class FTCApiHandler(apiData: FTCApiData) {
         client.newCall(request).enqueue(
             object: Callback {
                 override fun onFailure(call: Call, e: IOException) {
+                    Log.e(TAG, e.message.toString())
                     callback(Result.failure(e))
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     response.use { resp ->
                         if (!resp.isSuccessful) {
+                            Log.e(TAG, "HTTP ${resp.code}: ${resp.message}")
                             callback(Result.failure(IOException("HTTP ${resp.code}: ${resp.message}")))
                             return
                         }
@@ -258,8 +260,13 @@ class FTCApiHandler(apiData: FTCApiData) {
         // Process each page sequentially or in parallel
         for (i in 1..totalPages) {
             val teamNames = getTeamsInEventInPageSuspend(year, eventCode, i)
+            Log.i(TAG, "page requested: $i")
+            Log.i(TAG, "teamNames: ${teamNames.toTypedArray().contentToString()}")
             allTeamNames.addAll(teamNames)
+            Log.i(TAG, "successInAdding: ${allTeamNames.containsAll(teamNames)}")
         }
+
+        Log.i(TAG, "allTeamNames size: ${allTeamNames.size}")
 
         return allTeamNames
     }
