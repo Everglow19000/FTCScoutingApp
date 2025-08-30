@@ -23,7 +23,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-private val TAG: String = "ViewResultsActivity"
+private val TAG: String = "ViewResultsActivityTAG"
 class ViewResultsActivity : AppCompatActivity() {
     private lateinit var yearSelector: Spinner
     private lateinit var downloadDataButton: Button
@@ -36,8 +36,8 @@ class ViewResultsActivity : AppCompatActivity() {
 
 
 
-    private lateinit var startDate: Date
-    private lateinit var endDate: Date
+    private var startDate: Date? = null
+    private var endDate: Date? = null
 
     private lateinit var selectedYearRange: String
     override fun onCreate(savedInstanceState: Bundle?) {

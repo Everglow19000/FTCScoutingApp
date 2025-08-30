@@ -1,4 +1,6 @@
+import android.content.Intent
 import android.os.Environment
+import android.provider.MediaStore
 import android.service.autofill.FieldClassification
 import android.util.Log
 import androidx.core.util.Pools
@@ -37,7 +39,9 @@ object DatabaseHandler {
         databaseNewEntryRef.setValue(match.databaseEntry)
     }
 
-    fun fetchAllResultsFromSeason(yearRange: String, startDate: Date = Date(0), endDate: Date = Date()) {
+    fun fetchAllResultsFromSeason(yearRange: String, startDateIn: Date? = Date(0), endDateIn: Date? = Date()) {
+        var startDate: Date = startDateIn?: Date(0)
+        var endDate: Date = endDateIn?: Date()
         val workbook: XSSFWorkbook = XSSFWorkbook()
         val sheet: XSSFSheet = workbook.createSheet("Sheet1")
 
