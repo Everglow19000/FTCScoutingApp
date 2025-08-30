@@ -67,7 +67,7 @@ class FTCApiHandler(apiData: FTCApiData) {
                                     }
 
                                     // Fix: Actually add to the list
-                                    countriesToCodesAndNames[country]!!.add(EventCodeAndNamePair(eventCode, makeEventNameReadable(name, country)))
+                                    countriesToCodesAndNames[country]!!.add(EventCodeAndNamePair(eventCode, name))
                                 }
                             }
                         }
@@ -266,12 +266,5 @@ class FTCApiHandler(apiData: FTCApiData) {
 
     fun readableTeamName(shortName: String, number: String): String {
         return "$shortName $number"
-    }
-
-    fun makeEventNameReadable(name: String, countryName: String): String {
-        if (name.contains(countryName)) {
-            return name;
-        }
-        return "$countryName $name"
     }
 }

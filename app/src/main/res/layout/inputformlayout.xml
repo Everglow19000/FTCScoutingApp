@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35000002" />
+        app:layout_constraintVertical_bias="0.49" />
 
     <Spinner
         android:id="@+id/inputFormEventSelector"
@@ -65,26 +65,26 @@
         android:id="@+id/inputFormTeamNameInput"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:completionThreshold="0"
         android:ems="10"
         android:hint="Team Name"
         android:inputType="textAutoComplete"
-        app:layout_constraintBottom_toBottomOf="@+id/inputFormCountrySelector"
+        app:layout_constraintBottom_toTopOf="@+id/inputFormTabLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.995"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/inputFormCountrySelector"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.100000024" />
 
     <Button
         android:id="@+id/inputFormSendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/switchToResults"
-        app:layout_constraintStart_toStartOf="@+id/switchToResults"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/switchToResults"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/switchToResults"
+        app:layout_constraintTop_toTopOf="@+id/switchToResults" />
 
     <Button
         android:id="@+id/switchToResults"
