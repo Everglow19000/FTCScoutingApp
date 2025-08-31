@@ -29,7 +29,7 @@ object DatabaseHandler {
 
     fun getMatchResultsClassFromYearRangeAndDatabaseEntry(yearRange: String, databaseEntry: Map<String, Map<String, Long>>): MatchResults {
         if (yearRange.equals("2024-2025")) {
-            return IntoTheDeepResults(databaseEntry as Map<String?, Map<String?, Long?>?>?)
+            return IntoTheDeepResults(databaseEntry as Map<String?, Map<String?, Long?>?>?, null)
         }
         throw IllegalArgumentException("Must give a valid yearRange!")
     }

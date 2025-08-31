@@ -1,11 +1,11 @@
-import android.util.Log;
+import android.widget.TextView;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 // match results for the 2024-2025 season IntoTheDeep
 public class IntoTheDeepResults extends MatchResults {
+    public TextView totalScoreDisplay;
     public static String[] excelTitle = {"Team Name", "Date of Entry", "Autonomous Net Samples", "Autnomous Low Samples", "Autonomous High Samples", "Autonomous Low Specimens", "Autonmous High Specimens", "Opmode Net Samples", "Opmode Low Samples", "Opmode High Samples", "Opmode Low Specimens", "Opmode High Specimens", "Opmode Ascent"};
     public static enum AscentLevel {
         NONE(0),
@@ -36,45 +36,70 @@ public class IntoTheDeepResults extends MatchResults {
         }
     }
 
-    public static class ScoringMethods {
-        private long netSamples;
-        private long lowBasketSamples;
-        private long highBasketSamples;
-        private long lowSpecimens;
-        private long highSpecimens;
-        private AscentLevel ascentLevel;
+    public static class IntoTheDeepScoringMethods extends ScoringMethods {
+        public long netSamples;
+        public long lowBasketSamples;
+        public long highBasketSamples;
+        public long lowSpecimens;
+        public long highSpecimens;
+        public AscentLevel ascentLevel;
+        public IntoTheDeepResults containingClass;
 
-        public ScoringMethods(long netSamples, long lowBasketSamples, long highBasketSamples, long lowSpecimens, long highSpecimens, AscentLevel ascentLevel) {
+        public IntoTheDeepScoringMethods(long netSamples, long lowBasketSamples, long highBasketSamples, long lowSpecimens, long highSpecimens, AscentLevel ascentLevel, IntoTheDeepResults containingClass) {
             this.netSamples = netSamples;
             this.lowBasketSamples = lowBasketSamples;
             this.highBasketSamples = highBasketSamples;
             this.lowSpecimens = lowSpecimens;
             this.highSpecimens = highSpecimens;
             this.ascentLevel = ascentLevel;
+            this.containingClass = containingClass;
         }
 
-        public long getNetSamples() {
-            return netSamples;
+        public void setScoreOfMethod(String method, Long score) {
+            if (method.equals("Net Samples")) {
+                netSamples = score/2;
+            }
+            else if (method.equals("Low Basket Samples")) {
+                lowBasketSamples = score/4;
+            }
+            else if (method.equals("High Basket Samples")) {
+                highBasketSamples = score/8;
+            }
+            else if (method.equals("Low Specimens")) {
+                lowSpecimens = score/5;
+            }
+            else if (method.equals("High Specimens")) {
+                highSpecimens = score/10;
+            }
+            else if (method.equals("Ascent Level")) {
+                ascentLevel = AscentLevel.fromScore(score);
+            }
+
+            if (containingClass.totalScoreDisplay != null) {
+                containingClass.updateTotalScoreDisplay(containingClass.totalScoreDisplay);
+            }
         }
 
-        public long getLowBasketSamples() {
-            return lowBasketSamples;
-        }
-
-        public long getHighBasketSamples() {
-            return highBasketSamples;
-        }
-
-        public long getLowSpecimens() {
-            return lowSpecimens;
-        }
-
-        public long getHighSpecimens() {
-            return highSpecimens;
-        }
-
-        public AscentLevel getAscentLevel() {
-            return ascentLevel;
+        public long getScoreOfMethod(String method) {
+            if (method.equals("Net Samples")) {
+                return 2*netSamples;
+            }
+            else if (method.equals("Low Basket Samples")) {
+                return 4*lowBasketSamples;
+            }
+            else if (method.equals("High Basket Samples")) {
+                return 8*highBasketSamples;
+            }
+            else if (method.equals("Low Specimens")) {
+                return 5*lowSpecimens;
+            }
+            else if (method.equals("High Specimens")) {
+                return 10*highSpecimens;
+            }
+            else if (method.equals("Ascent Level")) {
+                return ascentLevel.value;
+            }
+            return 0;
         }
 
         public long calculateScore() {
@@ -82,18 +107,21 @@ public class IntoTheDeepResults extends MatchResults {
         }
     }
 
-    private ScoringMethods opMode;
-    private ScoringMethods autonomous;
+    public IntoTheDeepScoringMethods opMode;
+    public IntoTheDeepScoringMethods autonomous;
 
-    public IntoTheDeepResults(long netSamplesAuto, long lowBasketSamplesAuto, long highBasketSamplesAuto, long lowSpecimensAuto, long highSpecimensAuto, long netSamplesOpMode, long lowBasketSamplesOpMode, long highBasketSamplesOpMode, long lowSpecimensOpMode, long highSpecimensOpMode, AscentLevel opModeAscent) {
-        this.autonomous = new ScoringMethods(netSamplesAuto, lowBasketSamplesAuto, highBasketSamplesAuto, lowSpecimensAuto, highSpecimensAuto, AscentLevel.NONE);
-        this.opMode = new ScoringMethods(netSamplesOpMode, lowBasketSamplesOpMode, highBasketSamplesOpMode, lowSpecimensOpMode, highSpecimensOpMode, opModeAscent);
+    public IntoTheDeepResults(long netSamplesAuto, long lowBasketSamplesAuto, long highBasketSamplesAuto, long lowSpecimensAuto, long highSpecimensAuto, long netSamplesOpMode, long lowBasketSamplesOpMode, long highBasketSamplesOpMode, long lowSpecimensOpMode, long highSpecimensOpMode, AscentLevel opModeAscent, TextView totalScoreDisplay) {
+        this.totalScoreDisplay = totalScoreDisplay;
+        this.autonomous = new IntoTheDeepScoringMethods(netSamplesAuto, lowBasketSamplesAuto, highBasketSamplesAuto, lowSpecimensAuto, highSpecimensAuto, AscentLevel.NONE, this);
+        this.opMode = new IntoTheDeepScoringMethods(netSamplesOpMode, lowBasketSamplesOpMode, highBasketSamplesOpMode, lowSpecimensOpMode, highSpecimensOpMode, opModeAscent, this);
     }
 
     public static String TAG = "DatabaseHandlerTag";
 
-    public IntoTheDeepResults(Map<String, Map<String, Long>> databaseEntry) {
-        this(databaseEntry.get("autonomous").get("netSamples"), databaseEntry.get("autonomous").get("lowBasketSamples"), databaseEntry.get("autonomous").get("highBasketSamples"), databaseEntry.get("autonomous").get("lowSpecimens"), databaseEntry.get("autonomous").get("highSpecimens"), databaseEntry.get("opMode").get("netSamples"), databaseEntry.get("opMode").get("lowBasketSamples"), databaseEntry.get("opMode").get("highBasketSamples"), databaseEntry.get("opMode").get("lowSpecimens"), databaseEntry.get("opMode").get("highSpecimens"), AscentLevel.fromScore(databaseEntry.get("opMode").get("ascentScore")));
+    public IntoTheDeepResults(Map<String, Map<String, Long>> databaseEntry, TextView totalScoreDisplay) {
+        this.totalScoreDisplay = totalScoreDisplay;
+        this.autonomous = new IntoTheDeepScoringMethods(databaseEntry.get("autonomous").get("netSamples"), databaseEntry.get("autonomous").get("lowBasketSamples"), databaseEntry.get("autonomous").get("highBasketSamples"), databaseEntry.get("autonomous").get("lowSpecimens"), databaseEntry.get("autonomous").get("highSpecimens"), AscentLevel.NONE, this);
+        this.opMode = new IntoTheDeepScoringMethods(databaseEntry.get("opMode").get("netSamples"), databaseEntry.get("opMode").get("lowBasketSamples"), databaseEntry.get("opMode").get("highBasketSamples"), databaseEntry.get("opMode").get("lowSpecimens"), databaseEntry.get("opMode").get("highSpecimens"), AscentLevel.fromScore(databaseEntry.get("opMode").get("ascentScore")), this);
     }
 
     @Override
@@ -155,5 +183,24 @@ public class IntoTheDeepResults extends MatchResults {
     @Override
     public long getAutonomousScore() {
         return autonomous.calculateScore()*2;
+    }
+
+    @Override
+    public void clearScores() {
+        this.autonomous = new IntoTheDeepScoringMethods(0, 0, 0, 0, 0, AscentLevel.NONE, this);
+        this.opMode = new IntoTheDeepScoringMethods(0, 0, 0, 0, 0, AscentLevel.NONE, this);
+        if (totalScoreDisplay != null) {
+            updateTotalScoreDisplay(totalScoreDisplay);
+        }
+    }
+
+    @Override
+    public ScoringMethods getAutonomousScoringMethods() {
+        return autonomous;
+    }
+
+    @Override
+    public ScoringMethods getOpModeScoringMethods() {
+        return opMode;
     }
 }

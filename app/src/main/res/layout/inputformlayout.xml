@@ -26,16 +26,17 @@
         app:layout_constraintVertical_bias="1.0">
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/inputFormAutonomousTabItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Autonomous" />
+
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/inputFormOpModeTabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="OpMode" />
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/inputFormAutonomousTabItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Autonomous" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -97,5 +98,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95" />
+
+    <TextView
+        android:id="@+id/inputFormTotalScoreDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Total Score: 0p"
+        app:layout_constraintBottom_toTopOf="@+id/inputFormTabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/inputFormTeamNameInput"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

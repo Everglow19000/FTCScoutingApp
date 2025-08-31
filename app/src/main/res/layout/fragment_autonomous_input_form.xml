@@ -47,6 +47,17 @@
             android:layout_height="wrap_content"
             android:text="Net Samples"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousNetSamplesScoreDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormAutonomousNetSamplesDisplay"
+            app:layout_constraintHorizontal_bias="0.552"
+            app:layout_constraintStart_toStartOf="@+id/inputFormAutonomousNetSamplesDisplay" />
+
+        <TextView
+            android:id="@+id/inputFormAutonomousNetSamplesScoreDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score: 0p (0p)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousNetSamplesDisplay"
             app:layout_constraintEnd_toEndOf="@+id/inputFormAutonomousNetSamplesDisplay"
             app:layout_constraintStart_toStartOf="@+id/inputFormAutonomousNetSamplesDisplay" />
@@ -63,6 +74,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/inputFormAutonomousLowBasketScoreDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score: 0p (0p)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousLowBasketDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormAutonomousLowBasketDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormAutonomousLowBasketDisplay" />
 
         <Button
             android:id="@+id/inputFormAutonomousLowBasketAdditionButton"
@@ -82,16 +103,17 @@
             app:layout_constraintEnd_toStartOf="@+id/inputFormAutonomousLowBasketDisplay"
             app:layout_constraintTop_toTopOf="@+id/inputFormAutonomousLowBasketDisplay" />
 
+
         <TextView
             android:id="@+id/inputFormAutonomousLowBasketTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Low Basket"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousLowBasketDisplay"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousLowBasketScoreDisplay"
             app:layout_constraintEnd_toEndOf="@+id/inputFormAutonomousLowBasketDisplay"
+            app:layout_constraintHorizontal_bias="0.607"
             app:layout_constraintStart_toStartOf="@+id/inputFormAutonomousLowBasketDisplay" />
-
 
         <TextView
             android:id="@+id/inputFormAutonomousHighBasketDisplay"
@@ -130,10 +152,19 @@
             android:layout_height="wrap_content"
             android:text="High Basket"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousHighBasketDisplay"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousHighBasketScoreDisplay"
             app:layout_constraintEnd_toEndOf="@+id/inputFormAutonomousHighBasketDisplay"
             app:layout_constraintStart_toStartOf="@+id/inputFormAutonomousHighBasketDisplay" />
 
+        <TextView
+            android:id="@+id/inputFormAutonomousHighBasketScoreDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score: 0p (0p)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousHighBasketDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormAutonomousHighBasketDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormAutonomousHighBasketDisplay" />
 
         <TextView
             android:id="@+id/inputFormAutonomousLowSpecimensDisplay"
@@ -166,16 +197,26 @@
             app:layout_constraintEnd_toStartOf="@+id/inputFormAutonomousLowSpecimensDisplay"
             app:layout_constraintTop_toTopOf="@+id/inputFormAutonomousLowSpecimensDisplay" />
 
+
         <TextView
             android:id="@+id/inputFormAutonomousLowSpecimensTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Low Specimens"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousLowSpecimensDisplay"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousLowSpecimensScoreDisplay"
             app:layout_constraintEnd_toEndOf="@+id/inputFormAutonomousLowSpecimensDisplay"
             app:layout_constraintStart_toStartOf="@+id/inputFormAutonomousLowSpecimensDisplay" />
 
+        <TextView
+            android:id="@+id/inputFormAutonomousLowSpecimensScoreDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score: 0p (0p)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousLowSpecimensDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormAutonomousLowSpecimensDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormAutonomousLowSpecimensDisplay" />
 
         <TextView
             android:id="@+id/inputFormAutonomousHighSpecimensDisplay"
@@ -214,6 +255,16 @@
             android:layout_height="wrap_content"
             android:text="High Specimens"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousHighSpecimensScoreDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormAutonomousHighSpecimensDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormAutonomousHighSpecimensDisplay" />
+
+        <TextView
+            android:id="@+id/inputFormAutonomousHighSpecimensScoreDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score: 0p (0p)"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toTopOf="@+id/inputFormAutonomousHighSpecimensDisplay"
             app:layout_constraintEnd_toEndOf="@+id/inputFormAutonomousHighSpecimensDisplay"
             app:layout_constraintStart_toStartOf="@+id/inputFormAutonomousHighSpecimensDisplay" />

@@ -2,6 +2,7 @@ package com.example.ftcscoutingapp
 
 import FTCApiHandler
 import IntoTheDeepResults
+import MatchResults
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -26,6 +27,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlinx.serialization.json.Json
 import kotlin.coroutines.suspendCoroutine
+import kotlin.properties.Delegates
 
 
 private const val TAG = "InputFormActivityTAG"
@@ -55,6 +57,9 @@ class InputFormActivity : AppCompatActivity() {
 
     private var FTCApiHandlerInstance: FTCApiHandler? = null
 
+    public lateinit var matchResult: IntoTheDeepResults
+
+    private lateinit var totalScoreDisplay: TextView
 
     suspend fun updateEvents() {
         eventsList.clear()
@@ -81,6 +86,10 @@ class InputFormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inputformlayout)
+
+        totalScoreDisplay = findViewById(R.id.inputFormTotalScoreDisplay)
+
+        matchResult = IntoTheDeepResults(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, IntoTheDeepResults.AscentLevel.NONE, totalScoreDisplay)
 
         countrySelector = findViewById(R.id.inputFormCountrySelector)
         eventSelector = findViewById(R.id.inputFormEventSelector)
@@ -199,6 +208,9 @@ class InputFormActivity : AppCompatActivity() {
             }
         )
 
+        viewPagerAdapter.opmodeFragment.matchResult = matchResult
+        viewPagerAdapter.autonomousFragment.matchResult = matchResult
+
 
         editTextTeamName = findViewById(R.id.inputFormTeamNameInput)
         buttonSendButton = findViewById(R.id.inputFormSendButton)
@@ -214,23 +226,13 @@ class InputFormActivity : AppCompatActivity() {
                         val autonomousInputForm: AutonomousInputForm = viewPagerAdapter.autonomousFragment
 
                         DatabaseHandler.writeMatchResultToDataBase(
-                            IntoTheDeepResults(
-                                autonomousInputForm.getInputModuleValue("Net Samples"),
-                                autonomousInputForm.getInputModuleValue("Low Basket"),
-                                autonomousInputForm.getInputModuleValue("High Basket"),
-                                autonomousInputForm.getInputModuleValue("Low Specimens"),
-                                autonomousInputForm.getInputModuleValue("High Specimens"),
-                                opModeInputForm.getInputModuleValue("Net Samples"),
-                                opModeInputForm.getInputModuleValue("Low Basket"),
-                                opModeInputForm.getInputModuleValue("High Basket"),
-                                opModeInputForm.getInputModuleValue("Low Specimens"),
-                                opModeInputForm.getInputModuleValue("High Specimens"),
-                                opModeInputForm.getAscentLevel()
-                            ),
+                            matchResult,
                             teamName)
 
                         opModeInputForm.reset()
                         autonomousInputForm.reset()
+
+                        matchResult.clearScores()
 
                         editTextTeamName.text.clear()
                     }
@@ -283,14 +285,29 @@ class InputFormActivity : AppCompatActivity() {
     }
 }
 
-class SingleInputModule(subtractionButton: Button, additionButton: Button, var numberDisplay: TextView, val minValue: Int = 0, val maxValue: Int = 20, initialValue: Int = 0) {
-    var numberValue: Int = initialValue
+class SingleInputModule(var methodName: String, subtractionButton: Button, additionButton: Button, var numberDisplay: TextView, var scoreDisplay: TextView, var scoreCalculator: (Long) -> Long, var isAutonomous: Boolean, var matchResultToUpdate: IntoTheDeepResults, val minValue: Long = 0, val maxValue: Long = 20, initialValue: Long = 0) {
+    var numberValue: Long = 0
         set(value) {
-            field = min(max(value, minValue), maxValue)
+            field = min(max(value, minValue), maxValue).toLong()
             numberDisplay.text = "$value"
+            if (isAutonomous) {
+                scoreDisplay.text = "Score: ${scoreCalculator(numberValue)}p (${2*scoreCalculator(numberValue)}p)"
+                matchResultToUpdate.autonomous.setScoreOfMethod(methodName, scoreCalculator(numberValue))
+            }
+            else {
+                scoreDisplay.text = "Score: ${scoreCalculator(numberValue)}p"
+                matchResultToUpdate.opMode.setScoreOfMethod(methodName, scoreCalculator(numberValue))
+            }
         }
     init {
-        numberDisplay.text = "$numberValue"
+        numberValue = initialValue
+        numberDisplay.text = "${min(max(initialValue, minValue), maxValue)}"
+        if (isAutonomous) {
+            scoreDisplay.text = "Score: 0p (0p)"
+        }
+        else {
+            scoreDisplay.text = "Score: 0p"
+        }
 
         additionButton.setOnClickListener(
             object: View.OnClickListener {

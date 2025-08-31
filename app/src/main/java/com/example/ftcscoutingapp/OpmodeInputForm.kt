@@ -14,6 +14,7 @@ class OpmodeInputForm : Fragment() {
     private lateinit var inputModulesMap: MutableMap<String, SingleInputModule>
     private lateinit var ascentLevelMap: MutableMap<Int, IntoTheDeepResults.AscentLevel>
     private lateinit var radioGroup: RadioGroup
+    public lateinit var matchResult: IntoTheDeepResults
     private var checkedAscentLevel: IntoTheDeepResults.AscentLevel = IntoTheDeepResults.AscentLevel.NONE
 
     override fun onCreateView(
@@ -39,16 +40,68 @@ class OpmodeInputForm : Fragment() {
                     checkedId: Int
                 ) {
                     checkedAscentLevel = ascentLevelMap.getOrDefault(checkedId, IntoTheDeepResults.AscentLevel.NONE)
+                    matchResult.opMode.setScoreOfMethod("Ascent Level", checkedAscentLevel.value)
                 }
             }
         )
 
+        var netSamplesFunction = { count: Long -> 2*count }
+        var lowBasketFunction = { count: Long -> 4*count }
+        var highBasketFunction = { count: Long -> 8*count }
+        var lowSpecimensFunction = { count: Long -> 5*count }
+        var highSpecimensFunction = { count: Long -> 10*count }
+
         inputModulesMap = mutableMapOf(
-            "Net Samples" to SingleInputModule(inflated.findViewById<Button>(R.id.inputFormOpModeNetSamplesSubtractionButton), inflated.findViewById<Button>(R.id.inputFormOpModeNetSamplesAdditionButton), inflated.findViewById<TextView>(R.id.inputFormOpmodeNetSamplesDisplay)),
-            "Low Basket" to SingleInputModule(inflated.findViewById<Button>(R.id.inputFormOpModeLowBasketSubtractionButton), inflated.findViewById<Button>(R.id.inputFormOpModeLowBasketAdditionButton), inflated.findViewById<TextView>(R.id.inputFormOpmodeLowBasketDisplay)),
-            "High Basket" to SingleInputModule(inflated.findViewById<Button>(R.id.inputFormOpModeHighBasketSubtractionButton), inflated.findViewById<Button>(R.id.inputFormOpModeHighBasketAdditionButton), inflated.findViewById<TextView>(R.id.inputFormOpmodeHighBasketDisplay)),
-            "Low Specimens" to SingleInputModule(inflated.findViewById<Button>(R.id.inputFormOpModeLowSpecimensSubtractionButton), inflated.findViewById<Button>(R.id.inputFormOpModeLowSpecimensAdditionButton), inflated.findViewById<TextView>(R.id.inputFormOpmodeLowSpecimensDisplay)),
-            "High Specimens" to SingleInputModule(inflated.findViewById<Button>(R.id.inputFormOpModeHighSpecimensSubtractionButton), inflated.findViewById<Button>(R.id.inputFormOpModeHighSpecimensAdditionButton), inflated.findViewById<TextView>(R.id.inputFormOpmodeHighSpecimensDisplay))
+            "Net Samples" to SingleInputModule(
+                "Net Samples",
+                inflated.findViewById<Button>(R.id.inputFormOpModeNetSamplesSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormOpModeNetSamplesAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeNetSamplesDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeNetSamplesScoreDisplay),
+                netSamplesFunction,
+                false,
+                matchResult
+            ),
+            "Low Basket Samples" to SingleInputModule(
+                "Low Basket Samples",
+                inflated.findViewById<Button>(R.id.inputFormOpModeLowBasketSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormOpModeLowBasketAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeLowBasketDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeLowBasketScoreDisplay),
+                lowBasketFunction,
+                false,
+                matchResult
+            ),
+            "High Basket Samples" to SingleInputModule(
+                "High Basket Samples",
+                inflated.findViewById<Button>(R.id.inputFormOpModeHighBasketSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormOpModeHighBasketAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeHighBasketDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeHighBasketScoreDisplay),
+                highBasketFunction,
+                false,
+                matchResult
+            ),
+            "Low Specimens" to SingleInputModule(
+                "Low Specimens",
+                inflated.findViewById<Button>(R.id.inputFormOpModeLowSpecimensSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormOpModeLowSpecimensAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeLowSpecimensDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeLowSpecimensScoreDisplay),
+                lowSpecimensFunction,
+                false,
+                matchResult
+            ),
+            "High Specimens" to SingleInputModule(
+                "High Specimens",
+                inflated.findViewById<Button>(R.id.inputFormOpModeHighSpecimensSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormOpModeHighSpecimensAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeHighSpecimensDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeHighSpecimensScoreDisplay),
+                highSpecimensFunction,
+                false,
+                matchResult
+            )
         )
 
         return inflated

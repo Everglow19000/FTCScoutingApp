@@ -18,9 +18,9 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
-            case 0: return opmodeFragment;
-            case 1: return autonomousFragment;
-            default: return opmodeFragment;
+            case 0: return autonomousFragment;
+            case 1: return opmodeFragment;
+            default: return autonomousFragment;
         }
     }
 
