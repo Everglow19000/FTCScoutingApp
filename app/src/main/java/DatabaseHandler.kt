@@ -1,18 +1,12 @@
-import android.content.Intent
 import android.os.Environment
-import android.provider.MediaStore
-import android.service.autofill.FieldClassification
 import android.util.Log
-import androidx.core.util.Pools
 import com.google.firebase.Firebase
 import com.google.firebase.database.database
-import com.google.firebase.database.getValue
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.reflect.Constructor
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -27,9 +21,9 @@ object DatabaseHandler {
         IntoTheDeepResults::class.java to "2024-2025"
     )
 
-    fun getMatchResultsClassFromYearRangeAndDatabaseEntry(yearRange: String, databaseEntry: Map<String, Map<String, Long>>): MatchResults {
+    fun getMatchResultsClassFromYearRangeAndDatabaseEntry(yearRange: String, databaseEntry: Map<String, Map<String, String>>): MatchResults {
         if (yearRange.equals("2024-2025")) {
-            return IntoTheDeepResults(databaseEntry as Map<String?, Map<String?, Long?>?>?, null)
+            return IntoTheDeepResults(databaseEntry as Map<String?, Map<String?, String?>?>?, null)
         }
         throw IllegalArgumentException("Must give a valid yearRange!")
     }
@@ -71,10 +65,15 @@ object DatabaseHandler {
 
 
                         try {
-                            var matchResults: MatchResults = getMatchResultsClassFromYearRangeAndDatabaseEntry(yearRange, timestamp.getValue() as Map<String, Map<String, Long>>)
+                            var matchResults: MatchResults = getMatchResultsClassFromYearRangeAndDatabaseEntry(yearRange, timestamp.getValue() as Map<String, Map<String, String>>)
 
-                            for (number in matchResults.scoringMethodsCounts) {
-                                currRow.createCell(cellNum).setCellValue(number.toDouble())
+                            for (value in matchResults.excelRowData) {
+                                if (Utils.isNumeric(value)) {
+                                    currRow.createCell(cellNum).setCellValue(java.lang.Double.parseDouble(value))
+                                }
+                                else {
+                                    currRow.createCell(cellNum).setCellValue(value)
+                                }
                                 cellNum++
                             }
                             rowNum++

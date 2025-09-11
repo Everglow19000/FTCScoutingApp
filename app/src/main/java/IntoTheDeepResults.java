@@ -19,20 +19,43 @@ public class IntoTheDeepResults extends MatchResults {
         private AscentLevel(long value) {
             this.value = value;
         }
-        public static AscentLevel fromScore(long score) throws IllegalArgumentException{
-            if (score == 0) {
+        public static AscentLevel fromString(String value) {
+            if (value.equals("None")) {
                 return NONE;
             }
-            else if (score == 3) {
+            else if (value.equals("Parking")) {
                 return FIRST_LEVEL;
             }
-            else if (score == 15) {
+            else if (value.equals("First Level")) {
+                return FIRST_LEVEL;
+            }
+            else if (value.equals("Second Level")) {
                 return SECOND_LEVEL;
             }
-            else if (score == 30) {
+            else if (value.equals("Third Level")) {
                 return THIRD_LEVEL;
             }
-            throw new IllegalArgumentException("score must have a corresponding AscentLevel value!");
+            return NONE;
+        }
+
+        public String getName() {
+            String out = "INVALID";
+            if (this == NONE) {
+                out = "None";
+            }
+            else if (this == PARKING) {
+                out = "Parking";
+            }
+            else if (this == FIRST_LEVEL) {
+                out = "First Level";
+            }
+            else if (this == SECOND_LEVEL) {
+                out = "Second Level";
+            }
+            else if (this == THIRD_LEVEL) {
+                out = "Third Level";
+            }
+            return out;
         }
     }
 
@@ -45,6 +68,16 @@ public class IntoTheDeepResults extends MatchResults {
         public AscentLevel ascentLevel;
         public IntoTheDeepResults containingClass;
 
+        public IntoTheDeepScoringMethods(String netSamples, String lowBasketSamples, String highBasketSamples, String lowSpecimens, String highSpecimens, AscentLevel ascentLevel, IntoTheDeepResults containingClass) {
+            this.netSamples = Long.parseLong(netSamples);
+            this.lowBasketSamples = Long.parseLong(lowBasketSamples);
+            this.highBasketSamples = Long.parseLong(highBasketSamples);
+            this.lowSpecimens = Long.parseLong(lowSpecimens);
+            this.highSpecimens = Long.parseLong(highSpecimens);
+            this.ascentLevel = ascentLevel;
+            this.containingClass = containingClass;
+        }
+
         public IntoTheDeepScoringMethods(long netSamples, long lowBasketSamples, long highBasketSamples, long lowSpecimens, long highSpecimens, AscentLevel ascentLevel, IntoTheDeepResults containingClass) {
             this.netSamples = netSamples;
             this.lowBasketSamples = lowBasketSamples;
@@ -55,24 +88,24 @@ public class IntoTheDeepResults extends MatchResults {
             this.containingClass = containingClass;
         }
 
-        public void setScoreOfMethod(String method, Long score) {
+        public void setScoreOfMethod(String method, String score) {
             if (method.equals("Net Samples")) {
-                netSamples = score/2;
+                netSamples = Long.parseLong(score)/2;
             }
             else if (method.equals("Low Basket Samples")) {
-                lowBasketSamples = score/4;
+                lowBasketSamples = Long.parseLong(score)/4;
             }
             else if (method.equals("High Basket Samples")) {
-                highBasketSamples = score/8;
+                highBasketSamples = Long.parseLong(score)/8;
             }
             else if (method.equals("Low Specimens")) {
-                lowSpecimens = score/5;
+                lowSpecimens = Long.parseLong(score)/5;
             }
             else if (method.equals("High Specimens")) {
-                highSpecimens = score/10;
+                highSpecimens = Long.parseLong(score)/10;
             }
             else if (method.equals("Ascent Level")) {
-                ascentLevel = AscentLevel.fromScore(score);
+                ascentLevel = AscentLevel.fromString(score);
             }
 
             if (containingClass.totalScoreDisplay != null) {
@@ -80,26 +113,26 @@ public class IntoTheDeepResults extends MatchResults {
             }
         }
 
-        public long getScoreOfMethod(String method) {
+        public String getScoreOfMethod(String method) {
             if (method.equals("Net Samples")) {
-                return 2*netSamples;
+                return Long.toString(2*netSamples);
             }
             else if (method.equals("Low Basket Samples")) {
-                return 4*lowBasketSamples;
+                return Long.toString(4*lowBasketSamples);
             }
             else if (method.equals("High Basket Samples")) {
-                return 8*highBasketSamples;
+                return Long.toString(8*highBasketSamples);
             }
             else if (method.equals("Low Specimens")) {
-                return 5*lowSpecimens;
+                return Long.toString(5*lowSpecimens);
             }
             else if (method.equals("High Specimens")) {
-                return 10*highSpecimens;
+                return Long.toString(10*highSpecimens);
             }
             else if (method.equals("Ascent Level")) {
-                return ascentLevel.value;
+                return ascentLevel.getName();
             }
-            return 0;
+            return "0";
         }
 
         public long calculateScore() {
@@ -118,10 +151,10 @@ public class IntoTheDeepResults extends MatchResults {
 
     public static String TAG = "DatabaseHandlerTag";
 
-    public IntoTheDeepResults(Map<String, Map<String, Long>> databaseEntry, TextView totalScoreDisplay) {
+    public IntoTheDeepResults(Map<String, Map<String, String>> databaseEntry, TextView totalScoreDisplay) {
         this.totalScoreDisplay = totalScoreDisplay;
         this.autonomous = new IntoTheDeepScoringMethods(databaseEntry.get("autonomous").get("netSamples"), databaseEntry.get("autonomous").get("lowBasketSamples"), databaseEntry.get("autonomous").get("highBasketSamples"), databaseEntry.get("autonomous").get("lowSpecimens"), databaseEntry.get("autonomous").get("highSpecimens"), AscentLevel.NONE, this);
-        this.opMode = new IntoTheDeepScoringMethods(databaseEntry.get("opMode").get("netSamples"), databaseEntry.get("opMode").get("lowBasketSamples"), databaseEntry.get("opMode").get("highBasketSamples"), databaseEntry.get("opMode").get("lowSpecimens"), databaseEntry.get("opMode").get("highSpecimens"), AscentLevel.fromScore(databaseEntry.get("opMode").get("ascentScore")), this);
+        this.opMode = new IntoTheDeepScoringMethods(databaseEntry.get("opMode").get("netSamples"), databaseEntry.get("opMode").get("lowBasketSamples"), databaseEntry.get("opMode").get("highBasketSamples"), databaseEntry.get("opMode").get("lowSpecimens"), databaseEntry.get("opMode").get("highSpecimens"), AscentLevel.fromString(databaseEntry.get("opMode").get("ascentScore")), this);
     }
 
     @Override
@@ -141,24 +174,24 @@ public class IntoTheDeepResults extends MatchResults {
     }
 
     @Override
-    public Map<String, Map<String, Long>> getDatabaseEntry() {
-        Map<String, Long> opModeMap = new HashMap<>();
-        opModeMap.put("netSamples", opMode.netSamples);
-        opModeMap.put("lowBasketSamples", opMode.lowBasketSamples);
-        opModeMap.put("highBasketSamples", opMode.highBasketSamples);
-        opModeMap.put("lowSpecimens", opMode.lowSpecimens);
-        opModeMap.put("highSpecimens", opMode.highSpecimens);
-        opModeMap.put("ascentScore", opMode.ascentLevel.value);
+    public Map<String, Map<String, String>> getDatabaseEntry() {
+        Map<String, String> opModeMap = new HashMap<>();
+        opModeMap.put("netSamples", Long.toString(opMode.netSamples));
+        opModeMap.put("lowBasketSamples", Long.toString(opMode.lowBasketSamples));
+        opModeMap.put("highBasketSamples", Long.toString(opMode.highBasketSamples));
+        opModeMap.put("lowSpecimens", Long.toString(opMode.lowSpecimens));
+        opModeMap.put("highSpecimens", Long.toString(opMode.highSpecimens));
+        opModeMap.put("ascentScore", opMode.ascentLevel.getName());
 
-        Map<String, Long> autonomousMap = new HashMap<>();
-        autonomousMap.put("netSamples", autonomous.netSamples);
-        autonomousMap.put("lowBasketSamples", autonomous.lowBasketSamples);
-        autonomousMap.put("highBasketSamples", autonomous.highBasketSamples);
-        autonomousMap.put("lowSpecimens", autonomous.lowSpecimens);
-        autonomousMap.put("highSpecimens", autonomous.highSpecimens);
-        autonomousMap.put("ascentScore", 0L);
+        Map<String, String> autonomousMap = new HashMap<>();
+        autonomousMap.put("netSamples", Long.toString(autonomous.netSamples));
+        autonomousMap.put("lowBasketSamples", Long.toString(autonomous.lowBasketSamples));
+        autonomousMap.put("highBasketSamples", Long.toString(autonomous.highBasketSamples));
+        autonomousMap.put("lowSpecimens", Long.toString(autonomous.lowSpecimens));
+        autonomousMap.put("highSpecimens", Long.toString(autonomous.highSpecimens));
+        autonomousMap.put("ascentScore", "None");
 
-        Map<String, Map<String, Long>> map = new HashMap<>();
+        Map<String, Map<String, String>> map = new HashMap<>();
         map.put("opMode", opModeMap);
         map.put("autonomous", autonomousMap);
 
@@ -166,8 +199,20 @@ public class IntoTheDeepResults extends MatchResults {
     }
 
     @Override
-    public long[] getScoringMethodsCounts() {
-        return new long[]{autonomous.netSamples, autonomous.lowBasketSamples, autonomous.highBasketSamples, autonomous.lowSpecimens, autonomous.highSpecimens, opMode.netSamples, opMode.lowBasketSamples, opMode.highBasketSamples, opMode.lowSpecimens, opMode.highSpecimens, opMode.ascentLevel.value};
+    public String[] getExcelRowData() {
+        return new String[]{
+                Long.toString(autonomous.netSamples),
+                Long.toString(autonomous.lowBasketSamples),
+                Long.toString(autonomous.highBasketSamples),
+                Long.toString(autonomous.lowSpecimens),
+                Long.toString(autonomous.highSpecimens),
+                Long.toString(opMode.netSamples),
+                Long.toString(opMode.lowBasketSamples),
+                Long.toString(opMode.highBasketSamples),
+                Long.toString(opMode.lowSpecimens),
+                Long.toString(opMode.highSpecimens),
+                opMode.ascentLevel.toString()
+        };
     }
 
     @Override

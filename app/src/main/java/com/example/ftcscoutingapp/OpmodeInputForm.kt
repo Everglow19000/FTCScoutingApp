@@ -40,7 +40,7 @@ class OpmodeInputForm : Fragment() {
                     checkedId: Int
                 ) {
                     checkedAscentLevel = ascentLevelMap.getOrDefault(checkedId, IntoTheDeepResults.AscentLevel.NONE)
-                    matchResult.opMode.setScoreOfMethod("Ascent Level", checkedAscentLevel.value)
+                    matchResult.opMode.setScoreOfMethod("Ascent Level", checkedAscentLevel.getName())
                 }
             }
         )

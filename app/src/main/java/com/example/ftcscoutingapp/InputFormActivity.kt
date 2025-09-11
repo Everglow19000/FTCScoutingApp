@@ -292,11 +292,11 @@ class SingleInputModule(var methodName: String, subtractionButton: Button, addit
             numberDisplay.text = "$value"
             if (isAutonomous) {
                 scoreDisplay.text = "Score: ${scoreCalculator(numberValue)}p (${2*scoreCalculator(numberValue)}p)"
-                matchResultToUpdate.autonomous.setScoreOfMethod(methodName, scoreCalculator(numberValue))
+                matchResultToUpdate.autonomous.setScoreOfMethod(methodName, scoreCalculator(numberValue).toString())
             }
             else {
                 scoreDisplay.text = "Score: ${scoreCalculator(numberValue)}p"
-                matchResultToUpdate.opMode.setScoreOfMethod(methodName, scoreCalculator(numberValue))
+                matchResultToUpdate.opMode.setScoreOfMethod(methodName, scoreCalculator(numberValue).toString())
             }
         }
     init {
