@@ -157,21 +157,6 @@ public class IntoTheDeepResults extends MatchResults {
         this.opMode = new IntoTheDeepScoringMethods(databaseEntry.get("opMode").get("netSamples"), databaseEntry.get("opMode").get("lowBasketSamples"), databaseEntry.get("opMode").get("highBasketSamples"), databaseEntry.get("opMode").get("lowSpecimens"), databaseEntry.get("opMode").get("highSpecimens"), AscentLevel.fromString(databaseEntry.get("opMode").get("ascentScore")), this);
     }
 
-    @Override
-    public Map<String, Long> getScoringMethodPoints() {
-        Map<String, Long> map = new HashMap<>();
-        map.put("samples", (opMode.netSamples*2) + (opMode.lowBasketSamples*4) + (opMode.highBasketSamples*8) + (2*((autonomous.netSamples*2) + (autonomous.lowBasketSamples*4) + (autonomous.highBasketSamples*8))));
-        map.put("specimens", (opMode.lowSpecimens*5) + (opMode.highSpecimens*10) + (2*((opMode.lowSpecimens*5) + (opMode.highSpecimens*10))));
-        return map;
-    }
-
-    @Override
-    public Map<String, Long> getScoringMethodPointsNoAutonomousMultiplication() {
-        Map<String, Long> map = new HashMap<>();
-        map.put("samples", (opMode.netSamples*2) + (opMode.lowBasketSamples*4) + (opMode.highBasketSamples*8) + (autonomous.netSamples*2) + (autonomous.lowBasketSamples*4) + (autonomous.highBasketSamples*8));
-        map.put("specimens", (opMode.lowSpecimens*5) + (opMode.highSpecimens*10) + (opMode.lowSpecimens*5) + (opMode.highSpecimens*10));
-        return map;
-    }
 
     @Override
     public Map<String, Map<String, String>> getDatabaseEntry() {
@@ -215,10 +200,6 @@ public class IntoTheDeepResults extends MatchResults {
         };
     }
 
-    @Override
-    public String[] getExcelTitles() {
-        return excelTitle;
-    }
 
     @Override
     public long getOpModeScore() {
@@ -237,15 +218,5 @@ public class IntoTheDeepResults extends MatchResults {
         if (totalScoreDisplay != null) {
             updateTotalScoreDisplay(totalScoreDisplay);
         }
-    }
-
-    @Override
-    public ScoringMethods getAutonomousScoringMethods() {
-        return autonomous;
-    }
-
-    @Override
-    public ScoringMethods getOpModeScoringMethods() {
-        return opMode;
     }
 }
