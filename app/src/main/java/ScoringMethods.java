@@ -1,6 +1,6 @@
 public abstract class ScoringMethods {
-    abstract void setScoreOfMethod(String method, String value);
-    abstract String getScoreOfMethod(String method);
+    public abstract void setValueOfMethod(String method, String value);
+    public abstract String getValueOfMethod(String method);
 
     abstract long calculateScore();
 }

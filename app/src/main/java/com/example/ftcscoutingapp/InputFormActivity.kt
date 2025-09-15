@@ -1,7 +1,7 @@
 package com.example.ftcscoutingapp
 
+import DecodeResults
 import FTCApiHandler
-import IntoTheDeepResults
 import MatchResults
 import android.app.AlertDialog
 import android.content.Context
@@ -9,7 +9,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.Window
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -21,13 +20,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.io.InputStream
 import kotlin.math.max
 import kotlin.math.min
 import kotlinx.serialization.json.Json
-import kotlin.coroutines.suspendCoroutine
-import kotlin.properties.Delegates
 
 
 private const val TAG = "InputFormActivityTAG"
@@ -55,9 +51,9 @@ class InputFormActivity : AppCompatActivity() {
     private lateinit var eventsArrayAdapter: ArrayAdapter<FTCApiHandler.EventCodeAndNamePair>
     private lateinit var teamNamesArrayAdapter: ArrayAdapter<String>
 
-    private var FTCApiHandlerInstance: FTCApiHandler? = null
+    private var FTCApiHandlerInstance: FTCApiHandler = Utils.ftcApiHandlerInstance
 
-    public lateinit var matchResult: IntoTheDeepResults
+    public lateinit var matchResult: DecodeResults
 
     private lateinit var totalScoreDisplay: TextView
 
@@ -89,15 +85,13 @@ class InputFormActivity : AppCompatActivity() {
 
         totalScoreDisplay = findViewById(R.id.inputFormTotalScoreDisplay)
 
-        matchResult = IntoTheDeepResults(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, IntoTheDeepResults.AscentLevel.NONE, totalScoreDisplay)
+        matchResult = DecodeResults(totalScoreDisplay)
 
         countrySelector = findViewById(R.id.inputFormCountrySelector)
         eventSelector = findViewById(R.id.inputFormEventSelector)
 
 
         lifecycleScope.launch {
-            FTCApiHandlerInstance = getFTCApiHandler(this@InputFormActivity)
-
             countriesList = FTCApiHandlerInstance!!.countriesToCodesAndNames.keys.toMutableList().sorted().toMutableList()
             selectedCountry = countriesList[0]
 
@@ -254,25 +248,6 @@ class InputFormActivity : AppCompatActivity() {
         )
     }
 
-    suspend fun getFTCApiHandler(context: Context, fileName: String = "ftc-events-api.json"): FTCApiHandler? {
-        try {
-            val inputStream: InputStream = context.assets.open(fileName)
-            val size = inputStream.available()
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
-            inputStream.close()
-            var json = String(buffer, Charsets.UTF_8)
-            val apiData: FTCApiHandler.FTCApiData = Json.decodeFromString<FTCApiHandler.FTCApiData>(json)
-            val apiHandler: FTCApiHandler = FTCApiHandler(apiData)
-            apiHandler.initializeMap()
-            return apiHandler
-        } catch (ex: Exception) {
-            Log.e(TAG, ex.toString())
-            ex.printStackTrace()
-            return null
-        }
-    }
-
     fun showAlertDialogWithoutButtons(context: Context, title: String, message: String) {
         var builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setTitle(title)
@@ -285,29 +260,24 @@ class InputFormActivity : AppCompatActivity() {
     }
 }
 
-class SingleInputModule(var methodName: String, subtractionButton: Button, additionButton: Button, var numberDisplay: TextView, var scoreDisplay: TextView, var scoreCalculator: (Long) -> Long, var isAutonomous: Boolean, var matchResultToUpdate: IntoTheDeepResults, val minValue: Long = 0, val maxValue: Long = 20, initialValue: Long = 0) {
+class SingleInputModule(var methodName: String, subtractionButton: Button, additionButton: Button, var numberDisplay: TextView, var scoreDisplay: TextView, var scoreCalculator: (Long) -> Long, var isAutonomous: Boolean, var scoreStringProcessor: (Long) -> String, var matchResultToUpdate: MatchResults, val minValue: Long = 0, val maxValue: Long = 20, initialValue: Long = 0) {
     var numberValue: Long = 0
         set(value) {
             field = min(max(value, minValue), maxValue).toLong()
             numberDisplay.text = "$value"
             if (isAutonomous) {
                 scoreDisplay.text = "Score: ${scoreCalculator(numberValue)}p (${2*scoreCalculator(numberValue)}p)"
-                matchResultToUpdate.autonomous.setScoreOfMethod(methodName, scoreCalculator(numberValue).toString())
+                matchResultToUpdate.autonomousScoringMethods.setValueOfMethod(methodName, scoreCalculator(numberValue).toString())
             }
             else {
                 scoreDisplay.text = "Score: ${scoreCalculator(numberValue)}p"
-                matchResultToUpdate.opMode.setScoreOfMethod(methodName, scoreCalculator(numberValue).toString())
+                matchResultToUpdate.teleopScoringMethods.setValueOfMethod(methodName, scoreCalculator(numberValue).toString())
             }
         }
     init {
         numberValue = initialValue
         numberDisplay.text = "${min(max(initialValue, minValue), maxValue)}"
-        if (isAutonomous) {
-            scoreDisplay.text = "Score: 0p (0p)"
-        }
-        else {
-            scoreDisplay.text = "Score: 0p"
-        }
+        scoreDisplay.text = scoreStringProcessor(0)
 
         additionButton.setOnClickListener(
             object: View.OnClickListener {

@@ -8,6 +8,10 @@ public abstract class MatchResults {
     //modifiers such as *2 score are included here
     public abstract long getAutonomousScore();
 
+    public abstract ScoringMethods getTeleopScoringMethods();
+
+    public abstract ScoringMethods getAutonomousScoringMethods();
+
     public void updateTotalScoreDisplay(TextView totalScoreDisplay) {
         if (totalScoreDisplay != null) {
             StringBuilder builder = new StringBuilder("Total Score: ");

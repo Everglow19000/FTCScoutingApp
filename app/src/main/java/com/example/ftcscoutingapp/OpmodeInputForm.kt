@@ -1,6 +1,7 @@
 package com.example.ftcscoutingapp
 
-import IntoTheDeepResults
+import DecodeResults
+import MatchResults
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,10 +13,10 @@ import android.widget.TextView
 
 class OpmodeInputForm : Fragment() {
     private lateinit var inputModulesMap: MutableMap<String, SingleInputModule>
-    private lateinit var ascentLevelMap: MutableMap<Int, IntoTheDeepResults.AscentLevel>
+    private lateinit var BaseReturnMap: MutableMap<Int, DecodeResults.BaseReturn>
     private lateinit var radioGroup: RadioGroup
-    public lateinit var matchResult: IntoTheDeepResults
-    private var checkedAscentLevel: IntoTheDeepResults.AscentLevel = IntoTheDeepResults.AscentLevel.NONE
+    public lateinit var matchResult: MatchResults
+    private var checkedBaseReturn: DecodeResults.BaseReturn = DecodeResults.BaseReturn.NONE
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,82 +25,75 @@ class OpmodeInputForm : Fragment() {
         // Inflate the layout for this fragment
         var inflated = inflater.inflate(R.layout.fragment_opmode_input_form, container, false)
 
-        ascentLevelMap = mutableMapOf(
-            R.id.inputFormOpModeAscentLevelButtonNone to IntoTheDeepResults.AscentLevel.NONE,
-            R.id.inputFormOpModeAscentLevelButtonParking to IntoTheDeepResults.AscentLevel.PARKING,
-            R.id.inputFormOpModeAscentLevelButtonFirstLevel to IntoTheDeepResults.AscentLevel.FIRST_LEVEL,
-            R.id.inputFormOpModeAscentLevelButtonSecondLevel to IntoTheDeepResults.AscentLevel.SECOND_LEVEL,
-            R.id.inputFormOpModeAscentLevelButtonThirdevel to IntoTheDeepResults.AscentLevel.THIRD_LEVEL
+        BaseReturnMap = mutableMapOf(
+            R.id.inputFormOpModeBaseReturnButtonNone to DecodeResults.BaseReturn.NONE,
+            R.id.inputFormOpModeBaseReturnButtonPartial to DecodeResults.BaseReturn.PARTIAL,
+            R.id.inputFormOpModeBaseReturnButtonFull to DecodeResults.BaseReturn.FULL,
+            R.id.inputFormOpModeBaseReturnButtonBonus to DecodeResults.BaseReturn.BONUS,
         )
 
-        radioGroup = inflated.findViewById(R.id.inputFormOpModeAscentLevelGroup)
+        radioGroup = inflated.findViewById(R.id.inputFormOpModeBaseReturnGroup)
         radioGroup.setOnCheckedChangeListener(
             object: RadioGroup.OnCheckedChangeListener {
                 override fun onCheckedChanged(
                     group: RadioGroup,
                     checkedId: Int
                 ) {
-                    checkedAscentLevel = ascentLevelMap.getOrDefault(checkedId, IntoTheDeepResults.AscentLevel.NONE)
-                    matchResult.opMode.setScoreOfMethod("Ascent Level", checkedAscentLevel.getName())
+                    checkedBaseReturn = BaseReturnMap.getOrDefault(checkedId, DecodeResults.BaseReturn.NONE)
+                    matchResult.teleopScoringMethods.setValueOfMethod("Base Return", checkedBaseReturn.toString())
                 }
             }
         )
 
-        var netSamplesFunction = { count: Long -> 2*count }
-        var lowBasketFunction = { count: Long -> 4*count }
-        var highBasketFunction = { count: Long -> 8*count }
-        var lowSpecimensFunction = { count: Long -> 5*count }
-        var highSpecimensFunction = { count: Long -> 10*count }
+        var classifiedArtifactsFunction = { count: Long -> 3*count }
+        var overflowAndDepotArtifactsFunction = { count: Long -> 1*count }
+        var patternArtifactsFunction = { count: Long -> 2*count }
+
+        var everythingStringFunction = {score: Long -> "Score: ${score}p"}
 
         inputModulesMap = mutableMapOf(
-            "Net Samples" to SingleInputModule(
-                "Net Samples",
-                inflated.findViewById<Button>(R.id.inputFormOpModeNetSamplesSubtractionButton),
-                inflated.findViewById<Button>(R.id.inputFormOpModeNetSamplesAdditionButton),
-                inflated.findViewById<TextView>(R.id.inputFormOpModeNetSamplesDisplay),
-                inflated.findViewById<TextView>(R.id.inputFormOpModeNetSamplesScoreDisplay),
-                netSamplesFunction,
+            "Classified Artifacts" to SingleInputModule(
+                "Classified Artifacts",
+                inflated.findViewById<Button>(R.id.inputFormOpModeClassifiedArtifactsSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormOpModeClassifiedArtifactsAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeClassifiedArtifactsDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeClassifiedArtifactsScoreDisplay),
+                classifiedArtifactsFunction,
                 false,
+                everythingStringFunction,
                 matchResult
             ),
-            "Low Basket Samples" to SingleInputModule(
-                "Low Basket Samples",
-                inflated.findViewById<Button>(R.id.inputFormOpModeLowBasketSubtractionButton),
-                inflated.findViewById<Button>(R.id.inputFormOpModeLowBasketAdditionButton),
-                inflated.findViewById<TextView>(R.id.inputFormOpModeLowBasketDisplay),
-                inflated.findViewById<TextView>(R.id.inputFormOpModeLowBasketScoreDisplay),
-                lowBasketFunction,
+            "Overflow Artifacts" to SingleInputModule(
+                "Overflow Artifacts",
+                inflated.findViewById<Button>(R.id.inputFormOpModeOverflowArtifactsSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormOpModeOverflowArtifactsAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeOverflowArtifactsDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeOverflowArtifactsScoreDisplay),
+                overflowAndDepotArtifactsFunction,
                 false,
+                everythingStringFunction,
                 matchResult
             ),
-            "High Basket Samples" to SingleInputModule(
-                "High Basket Samples",
-                inflated.findViewById<Button>(R.id.inputFormOpModeHighBasketSubtractionButton),
-                inflated.findViewById<Button>(R.id.inputFormOpModeHighBasketAdditionButton),
-                inflated.findViewById<TextView>(R.id.inputFormOpModeHighBasketDisplay),
-                inflated.findViewById<TextView>(R.id.inputFormOpModeHighBasketScoreDisplay),
-                highBasketFunction,
+            "Depot Artifacts" to SingleInputModule(
+                "Depot Artifacts",
+                inflated.findViewById<Button>(R.id.inputFormOpModeDepotArtifactsSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormOpModeDepotArtifactsAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeDepotArtifactsDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormOpModeDepotArtifactsScoreDisplay),
+                overflowAndDepotArtifactsFunction,
                 false,
+                everythingStringFunction,
                 matchResult
             ),
-            "Low Specimens" to SingleInputModule(
-                "Low Specimens",
-                inflated.findViewById<Button>(R.id.inputFormOpModeLowSpecimensSubtractionButton),
-                inflated.findViewById<Button>(R.id.inputFormOpModeLowSpecimensAdditionButton),
-                inflated.findViewById<TextView>(R.id.inputFormOpModeLowSpecimensDisplay),
-                inflated.findViewById<TextView>(R.id.inputFormOpModeLowSpecimensScoreDisplay),
-                lowSpecimensFunction,
+            "Pattern Artifacts" to SingleInputModule(
+                "Pattern Artifacts",
+                inflated.findViewById<Button>(R.id.inputFormOpModePatternArtifactsSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormOpModePatternArtifactsAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormOpModePatternArtifactsDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormOpModePatternArtifactsScoreDisplay),
+                patternArtifactsFunction,
                 false,
-                matchResult
-            ),
-            "High Specimens" to SingleInputModule(
-                "High Specimens",
-                inflated.findViewById<Button>(R.id.inputFormOpModeHighSpecimensSubtractionButton),
-                inflated.findViewById<Button>(R.id.inputFormOpModeHighSpecimensAdditionButton),
-                inflated.findViewById<TextView>(R.id.inputFormOpModeHighSpecimensDisplay),
-                inflated.findViewById<TextView>(R.id.inputFormOpModeHighSpecimensScoreDisplay),
-                highSpecimensFunction,
-                false,
+                everythingStringFunction,
                 matchResult
             )
         )
@@ -112,8 +106,8 @@ class OpmodeInputForm : Fragment() {
         return inputModulesMap[name]!!.numberValue.toLong()
     }
 
-    fun getAscentLevel(): IntoTheDeepResults.AscentLevel {
-        return checkedAscentLevel
+    fun getBaseReturn(): DecodeResults.BaseReturn {
+        return checkedBaseReturn
     }
 
     fun reset() {

@@ -1,16 +1,19 @@
 package com.example.ftcscoutingapp
 
 import IntoTheDeepResults
+import MatchResults
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Switch
 import android.widget.TextView
 
 class AutonomousInputForm : Fragment() {
-    public lateinit var matchResult: IntoTheDeepResults
+    private lateinit var didLeaveSwitch: Switch
+    public lateinit var matchResult: MatchResults
     private lateinit var inputModulesMap: MutableMap<String, SingleInputModule>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,61 +22,47 @@ class AutonomousInputForm : Fragment() {
         // Inflate the layout for this fragment
         var inflated = inflater.inflate(R.layout.fragment_autonomous_input_form, container, false)
 
-        var netSamplesFunction = { count: Long -> 2*count }
-        var lowBasketFunction = { count: Long -> 4*count }
-        var highBasketFunction = { count: Long -> 8*count }
-        var lowSpecimensFunction = { count: Long -> 5*count }
-        var highSpecimensFunction = { count: Long -> 10*count }
+        didLeaveSwitch = inflated.findViewById(R.id.inputFormAutonomousDidLeaveSwitch)
+
+
+        var classifiedArtifactsFunction = { count: Long -> 3*count }
+        var overflowArtifactsFunction = { count: Long -> 1*count }
+        var patternArtifactsFunction = { count: Long -> 2*count }
+
+        var everythingStringFunction = {score: Long -> "Score: ${score}p"}
 
         inputModulesMap = mutableMapOf(
-            "Net Samples" to SingleInputModule(
-                "Net Samples",
-                inflated.findViewById<Button>(R.id.inputFormAutonomousNetSamplesSubtractionButton),
-                inflated.findViewById<Button>(R.id.inputFormAutonomousNetSamplesAdditionButton),
-                inflated.findViewById<TextView>(R.id.inputFormAutonomousNetSamplesDisplay),
-                inflated.findViewById<TextView>(R.id.inputFormAutonomousNetSamplesScoreDisplay),
-                netSamplesFunction,
+            "Classified Artifacts" to SingleInputModule(
+                "Classified Artifacts",
+                inflated.findViewById<Button>(R.id.inputFormAutonomousClassifiedArtifactsSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormAutonomousClassifiedArtifactsAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormAutonomousClassifiedArtifactsDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormAutonomousClassifiedArtifactsScoreDisplay),
+                classifiedArtifactsFunction,
                 true,
+                everythingStringFunction,
                 matchResult
             ),
-            "Low Basket Samples" to SingleInputModule(
-                "Low Basket Samples",
-                inflated.findViewById<Button>(R.id.inputFormAutonomousLowBasketSubtractionButton),
-                inflated.findViewById<Button>(R.id.inputFormAutonomousLowBasketAdditionButton),
-                inflated.findViewById<TextView>(R.id.inputFormAutonomousLowBasketDisplay),
-                inflated.findViewById<TextView>(R.id.inputFormAutonomousLowBasketScoreDisplay),
-                lowBasketFunction,
+            "Overflow Artifacts" to SingleInputModule(
+                "Overflow Artifacts",
+                inflated.findViewById<Button>(R.id.inputFormAutonomousOverflowArtifactsSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormAutonomousOverflowArtifactsAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormAutonomousOverflowArtifactsDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormAutonomousOverflowArtifactsScoreDisplay),
+                overflowArtifactsFunction,
                 true,
+                everythingStringFunction,
                 matchResult
             ),
-            "High Basket Samples" to SingleInputModule(
-                "High Basket Samples",
-                inflated.findViewById<Button>(R.id.inputFormAutonomousHighBasketSubtractionButton),
-                inflated.findViewById<Button>(R.id.inputFormAutonomousHighBasketAdditionButton),
-                inflated.findViewById<TextView>(R.id.inputFormAutonomousHighBasketDisplay),
-                inflated.findViewById<TextView>(R.id.inputFormAutonomousHighBasketScoreDisplay),
-                highBasketFunction,
+            "Pattern Artifacts" to SingleInputModule(
+                "Pattern Artifacts",
+                inflated.findViewById<Button>(R.id.inputFormAutonomousPatternArtifactsSubtractionButton),
+                inflated.findViewById<Button>(R.id.inputFormAutonomousPatternArtifactsAdditionButton),
+                inflated.findViewById<TextView>(R.id.inputFormAutonomousPatternArtifactsDisplay),
+                inflated.findViewById<TextView>(R.id.inputFormAutonomousPatternArtifactsScoreDisplay),
+                patternArtifactsFunction,
                 true,
-                matchResult
-            ),
-            "Low Specimens" to SingleInputModule(
-                "Low Specimens",
-                inflated.findViewById<Button>(R.id.inputFormAutonomousLowSpecimensSubtractionButton),
-                inflated.findViewById<Button>(R.id.inputFormAutonomousLowSpecimensAdditionButton),
-                inflated.findViewById<TextView>(R.id.inputFormAutonomousLowSpecimensDisplay),
-                inflated.findViewById<TextView>(R.id.inputFormAutonomousLowSpecimensScoreDisplay),
-                lowSpecimensFunction,
-                true,
-                matchResult
-            ),
-            "High Specimens" to SingleInputModule(
-                "High Specimens",
-                inflated.findViewById<Button>(R.id.inputFormAutonomousHighSpecimensSubtractionButton),
-                inflated.findViewById<Button>(R.id.inputFormAutonomousHighSpecimensAdditionButton),
-                inflated.findViewById<TextView>(R.id.inputFormAutonomousHighSpecimensDisplay),
-                inflated.findViewById<TextView>(R.id.inputFormAutonomousHighSpecimensScoreDisplay),
-                highSpecimensFunction,
-                true,
+                everythingStringFunction,
                 matchResult
             )
         )

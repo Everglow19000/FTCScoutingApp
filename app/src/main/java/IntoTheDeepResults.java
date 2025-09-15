@@ -88,7 +88,7 @@ public class IntoTheDeepResults extends MatchResults {
             this.containingClass = containingClass;
         }
 
-        public void setScoreOfMethod(String method, String score) {
+        public void setValueOfMethod(String method, String score) {
             if (method.equals("Net Samples")) {
                 netSamples = Long.parseLong(score)/2;
             }
@@ -113,7 +113,7 @@ public class IntoTheDeepResults extends MatchResults {
             }
         }
 
-        public String getScoreOfMethod(String method) {
+        public String getValueOfMethod(String method) {
             if (method.equals("Net Samples")) {
                 return Long.toString(2*netSamples);
             }
@@ -209,6 +209,15 @@ public class IntoTheDeepResults extends MatchResults {
     @Override
     public long getAutonomousScore() {
         return autonomous.calculateScore()*2;
+    }
+
+
+    public ScoringMethods getTeleopScoringMethods() {
+        return opMode;
+    }
+
+    public ScoringMethods getAutonomousScoringMethods() {
+        return autonomous;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.ftcscoutingapp
 
+import FTCApiHandler
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +17,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
 import com.example.ftcscoutingapp.ui.theme.FTCScoutingAppTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainToResultsButton: Button
@@ -25,6 +28,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mainlayout)
+
+        lifecycleScope.launch {
+            Utils.ftcApiHandlerInstance = Utils.getFTCApiHandler(this@MainActivity)!!
+        }
 
         mainToResultsButton = findViewById(R.id.mainToResultsButton)
         mainToInputForm = findViewById(R.id.mainToInputButton)

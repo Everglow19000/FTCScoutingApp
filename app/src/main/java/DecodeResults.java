@@ -78,7 +78,7 @@ public class DecodeResults extends MatchResults {
         }
 
         @Override
-        public void setScoreOfMethod(String method, String value) {
+        public void setValueOfMethod(String method, String value) {
             if (method.equals("Classified Artifacts")) {
                 this.classifiedArtifacts = Long.parseLong(value);
             }
@@ -104,7 +104,7 @@ public class DecodeResults extends MatchResults {
         }
 
         @Override
-        public String getScoreOfMethod(String method) {
+        public String getValueOfMethod(String method) {
             if (method.equals("Classified Artifacts")) {
                 return Long.toString(this.classifiedArtifacts);
             }
@@ -132,8 +132,8 @@ public class DecodeResults extends MatchResults {
         }
     }
 
-    private DecodeScoringMethods opMode;
-    private DecodeScoringMethods autonomous;
+    public DecodeScoringMethods opMode;
+    public DecodeScoringMethods autonomous;
 
     public DecodeResults(TextView totalScoreDisplay) {
         this.totalScoreDisplay = totalScoreDisplay;
@@ -171,6 +171,14 @@ public class DecodeResults extends MatchResults {
     @Override
     public long getAutonomousScore() {
         return autonomous.calculateScore();
+    }
+
+    public ScoringMethods getTeleopScoringMethods() {
+        return opMode;
+    }
+
+    public ScoringMethods getAutonomousScoringMethods() {
+        return autonomous;
     }
 
     @Override

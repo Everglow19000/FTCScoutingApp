@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/inputFormOpModeNetSamplesDisplay"
+            android:id="@+id/inputFormOpModeClassifiedArtifactsDisplay"
             android:layout_width="64dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -24,46 +24,46 @@
             app:layout_constraintVertical_bias="0.1" />
 
         <Button
-            android:id="@+id/inputFormOpModeNetSamplesAdditionButton"
+            android:id="@+id/inputFormOpModeClassifiedArtifactsAdditionButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="+"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeNetSamplesDisplay"
-            app:layout_constraintStart_toEndOf="@+id/inputFormOpModeNetSamplesDisplay"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeNetSamplesDisplay" />
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeClassifiedArtifactsDisplay"
+            app:layout_constraintStart_toEndOf="@+id/inputFormOpModeClassifiedArtifactsDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeClassifiedArtifactsDisplay" />
 
         <Button
-            android:id="@+id/inputFormOpModeNetSamplesSubtractionButton"
+            android:id="@+id/inputFormOpModeClassifiedArtifactsSubtractionButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="-"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeNetSamplesDisplay"
-            app:layout_constraintEnd_toStartOf="@+id/inputFormOpModeNetSamplesDisplay"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeNetSamplesDisplay" />
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeClassifiedArtifactsDisplay"
+            app:layout_constraintEnd_toStartOf="@+id/inputFormOpModeClassifiedArtifactsDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeClassifiedArtifactsDisplay" />
 
         <TextView
-            android:id="@+id/inputFormOpModeNetSamplesTitle"
+            android:id="@+id/inputFormOpModeClassifiedArtifactsTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Net Samples"
+            android:text="Classified Artifacts"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeNetSamplesScoreDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeNetSamplesDisplay"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeClassifiedArtifactsScoreDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeClassifiedArtifactsDisplay"
             app:layout_constraintHorizontal_bias="0.552"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeNetSamplesDisplay" />
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeClassifiedArtifactsDisplay" />
 
         <TextView
-            android:id="@+id/inputFormOpModeNetSamplesScoreDisplay"
+            android:id="@+id/inputFormOpModeClassifiedArtifactsScoreDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Score: 0p (0p)"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeNetSamplesDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeNetSamplesDisplay"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeNetSamplesDisplay" />
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeClassifiedArtifactsDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeClassifiedArtifactsDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeClassifiedArtifactsDisplay" />
 
         <TextView
-            android:id="@+id/inputFormOpModeLowBasketDisplay"
+            android:id="@+id/inputFormOpModeOverflowArtifactsDisplay"
             android:layout_width="64dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -76,98 +76,48 @@
             app:layout_constraintVertical_bias="0.5" />
 
         <TextView
-            android:id="@+id/inputFormOpModeLowBasketScoreDisplay"
+            android:id="@+id/inputFormOpModeOverflowArtifactsScoreDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Score: 0p (0p)"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeLowBasketDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeLowBasketDisplay"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeLowBasketDisplay" />
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeOverflowArtifactsDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeOverflowArtifactsDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeOverflowArtifactsDisplay" />
 
         <Button
-            android:id="@+id/inputFormOpModeLowBasketAdditionButton"
+            android:id="@+id/inputFormOpModeOverflowArtifactsAdditionButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="+"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeLowBasketDisplay"
-            app:layout_constraintStart_toEndOf="@+id/inputFormOpModeLowBasketDisplay"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeLowBasketDisplay" />
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeOverflowArtifactsDisplay"
+            app:layout_constraintStart_toEndOf="@+id/inputFormOpModeOverflowArtifactsDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeOverflowArtifactsDisplay" />
 
         <Button
-            android:id="@+id/inputFormOpModeLowBasketSubtractionButton"
+            android:id="@+id/inputFormOpModeOverflowArtifactsSubtractionButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="-"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeLowBasketDisplay"
-            app:layout_constraintEnd_toStartOf="@+id/inputFormOpModeLowBasketDisplay"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeLowBasketDisplay" />
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeOverflowArtifactsDisplay"
+            app:layout_constraintEnd_toStartOf="@+id/inputFormOpModeOverflowArtifactsDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeOverflowArtifactsDisplay" />
 
 
         <TextView
-            android:id="@+id/inputFormOpModeLowBasketTitle"
+            android:id="@+id/inputFormOpModeOverflowArtifactsTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Low Basket"
+            android:text="Overflow Artifacts"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeLowBasketScoreDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeLowBasketDisplay"
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeOverflowArtifactsScoreDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeOverflowArtifactsDisplay"
             app:layout_constraintHorizontal_bias="0.607"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeLowBasketDisplay" />
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeOverflowArtifactsDisplay" />
+
 
         <TextView
-            android:id="@+id/inputFormOpModeHighBasketDisplay"
-            android:layout_width="64dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.9" />
-
-        <Button
-            android:id="@+id/inputFormOpModeHighBasketAdditionButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="+"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeHighBasketDisplay"
-            app:layout_constraintStart_toEndOf="@+id/inputFormOpModeHighBasketDisplay"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeHighBasketDisplay" />
-
-        <Button
-            android:id="@+id/inputFormOpModeHighBasketSubtractionButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="-"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeHighBasketDisplay"
-            app:layout_constraintEnd_toStartOf="@+id/inputFormOpModeHighBasketDisplay"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeHighBasketDisplay" />
-
-        <TextView
-            android:id="@+id/inputFormOpModeHighBasketTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="High Basket"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeHighBasketScoreDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeHighBasketDisplay"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeHighBasketDisplay" />
-
-        <TextView
-            android:id="@+id/inputFormOpModeHighBasketScoreDisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Score: 0p (0p)"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeHighBasketDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeHighBasketDisplay"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeHighBasketDisplay" />
-
-        <TextView
-            android:id="@+id/inputFormOpModeLowSpecimensDisplay"
+            android:id="@+id/inputFormOpModeDepotArtifactsDisplay"
             android:layout_width="64dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -180,46 +130,46 @@
             app:layout_constraintVertical_bias="0.1" />
 
         <Button
-            android:id="@+id/inputFormOpModeLowSpecimensAdditionButton"
+            android:id="@+id/inputFormOpModeDepotArtifactsAdditionButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="+"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeLowSpecimensDisplay"
-            app:layout_constraintStart_toEndOf="@+id/inputFormOpModeLowSpecimensDisplay"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeLowSpecimensDisplay" />
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeDepotArtifactsDisplay"
+            app:layout_constraintStart_toEndOf="@+id/inputFormOpModeDepotArtifactsDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeDepotArtifactsDisplay" />
 
         <Button
-            android:id="@+id/inputFormOpModeLowSpecimensSubtractionButton"
+            android:id="@+id/inputFormOpModeDepotArtifactsSubtractionButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="-"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeLowSpecimensDisplay"
-            app:layout_constraintEnd_toStartOf="@+id/inputFormOpModeLowSpecimensDisplay"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeLowSpecimensDisplay" />
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeDepotArtifactsDisplay"
+            app:layout_constraintEnd_toStartOf="@+id/inputFormOpModeDepotArtifactsDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeDepotArtifactsDisplay" />
 
 
         <TextView
-            android:id="@+id/inputFormOpModeLowSpecimensTitle"
+            android:id="@+id/inputFormOpModeDepotArtifactsTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Low Specimens"
+            android:text="Depot Artifacts"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeLowSpecimensScoreDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeLowSpecimensDisplay"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeLowSpecimensDisplay" />
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeDepotArtifactsScoreDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeDepotArtifactsDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeDepotArtifactsDisplay" />
 
         <TextView
-            android:id="@+id/inputFormOpModeLowSpecimensScoreDisplay"
+            android:id="@+id/inputFormOpModeDepotArtifactsScoreDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Score: 0p (0p)"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeLowSpecimensDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeLowSpecimensDisplay"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeLowSpecimensDisplay" />
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeDepotArtifactsDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeDepotArtifactsDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeDepotArtifactsDisplay" />
 
         <TextView
-            android:id="@+id/inputFormOpModeHighSpecimensDisplay"
+            android:id="@+id/inputFormOpModePatternArtifactsDisplay"
             android:layout_width="64dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -232,90 +182,86 @@
             app:layout_constraintVertical_bias="0.5" />
 
         <Button
-            android:id="@+id/inputFormOpModeHighSpecimensAdditionButton"
+            android:id="@+id/inputFormOpModePatternArtifactsAdditionButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="+"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeHighSpecimensDisplay"
-            app:layout_constraintStart_toEndOf="@+id/inputFormOpModeHighSpecimensDisplay"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeHighSpecimensDisplay" />
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModePatternArtifactsDisplay"
+            app:layout_constraintStart_toEndOf="@+id/inputFormOpModePatternArtifactsDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpModePatternArtifactsDisplay" />
 
         <Button
-            android:id="@+id/inputFormOpModeHighSpecimensSubtractionButton"
+            android:id="@+id/inputFormOpModePatternArtifactsSubtractionButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="-"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeHighSpecimensDisplay"
-            app:layout_constraintEnd_toStartOf="@+id/inputFormOpModeHighSpecimensDisplay"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeHighSpecimensDisplay" />
+            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModePatternArtifactsDisplay"
+            app:layout_constraintEnd_toStartOf="@+id/inputFormOpModePatternArtifactsDisplay"
+            app:layout_constraintTop_toTopOf="@+id/inputFormOpModePatternArtifactsDisplay" />
 
         <TextView
-            android:id="@+id/inputFormOpModeHighSpecimensTitle"
+            android:id="@+id/inputFormOpModePatternArtifactsTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="High Specimens"
+            android:text="Pattern Artifacts"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeHighSpecimensScoreDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeHighSpecimensDisplay"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeHighSpecimensDisplay" />
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModePatternArtifactsScoreDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModePatternArtifactsDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpModePatternArtifactsDisplay" />
 
         <TextView
-            android:id="@+id/inputFormOpModeHighSpecimensScoreDisplay"
+            android:id="@+id/inputFormOpModePatternArtifactsScoreDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Score: 0p (0p)"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModeHighSpecimensDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeHighSpecimensDisplay"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeHighSpecimensDisplay" />
+            app:layout_constraintBottom_toTopOf="@+id/inputFormOpModePatternArtifactsDisplay"
+            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModePatternArtifactsDisplay"
+            app:layout_constraintStart_toStartOf="@+id/inputFormOpModePatternArtifactsDisplay" />
 
 
         <RadioGroup
-            android:id="@+id/inputFormOpModeAscentLevelGroup"
+            android:id="@+id/inputFormOpModeBaseReturnGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="@+id/inputFormOpModeHighBasketDisplay"
-            app:layout_constraintEnd_toEndOf="@+id/inputFormOpModeHighSpecimensAdditionButton"
-            app:layout_constraintStart_toStartOf="@+id/inputFormOpModeHighSpecimensSubtractionButton"
-            app:layout_constraintTop_toTopOf="@+id/inputFormOpModeHighBasketDisplay"
-            app:layout_constraintVertical_bias="0.8">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.84000003">
 
             <TextView
-                android:id="@+id/inputFormOpModeAscentLevelTitle"
+                android:id="@+id/inputFormOpModeBaseReturnTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Choose Ascent Level" />
+                android:text="Choose Base Return"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <RadioButton
-                android:id="@+id/inputFormOpModeAscentLevelButtonNone"
+                android:id="@+id/inputFormOpModeBaseReturnButtonNone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="None (0p)" />
 
             <RadioButton
-                android:id="@+id/inputFormOpModeAscentLevelButtonParking"
+                android:id="@+id/inputFormOpModeBaseReturnButtonPartial"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Parking (3p)" />
+                android:text="Partial (5p)" />
 
             <RadioButton
-                android:id="@+id/inputFormOpModeAscentLevelButtonFirstLevel"
+                android:id="@+id/inputFormOpModeBaseReturnButtonFull"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="1st Level (3p)" />
+                android:text="Full (10p)" />
 
             <RadioButton
-                android:id="@+id/inputFormOpModeAscentLevelButtonSecondLevel"
+                android:id="@+id/inputFormOpModeBaseReturnButtonBonus"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="2nd Level (15p)" />
+                android:text="Bonus (+10p)" />
 
-            <RadioButton
-                android:id="@+id/inputFormOpModeAscentLevelButtonThirdevel"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="3rd Level (30p)" />
 
         </RadioGroup>
 
