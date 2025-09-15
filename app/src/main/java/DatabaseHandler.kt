@@ -15,15 +15,20 @@ object DatabaseHandler {
     val database = Firebase.database("https://everglowftcscoutingdatabase-default-rtdb.europe-west1.firebasedatabase.app/")
 
     val yearRangesToExcelHeader: MutableMap<String, Array<String>> = mutableMapOf(
-        "2024-2025" to IntoTheDeepResults.excelTitle
+        "2024-2025" to IntoTheDeepResults.excelTitle,
+        "2025-2026" to DecodeResults.excelTitle,
     )
     val matchResultsClassToYearRanges: MutableMap<Class<out MatchResults>, String> = mutableMapOf(
-        IntoTheDeepResults::class.java to "2024-2025"
+        IntoTheDeepResults::class.java to "2024-2025",
+        DecodeResults::class.java to "2025-2026",
     )
 
     fun getMatchResultsClassFromYearRangeAndDatabaseEntry(yearRange: String, databaseEntry: Map<String, Map<String, String>>): MatchResults {
         if (yearRange.equals("2024-2025")) {
             return IntoTheDeepResults(databaseEntry as Map<String?, Map<String?, String?>?>?, null)
+        }
+        else if (yearRange.equals("2025-2026")) {
+            return DecodeResults(databaseEntry as Map<String?, Map<String?, String?>?>?, null)
         }
         throw IllegalArgumentException("Must give a valid yearRange!")
     }
