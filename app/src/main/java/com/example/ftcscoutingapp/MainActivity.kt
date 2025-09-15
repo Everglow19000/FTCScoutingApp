@@ -20,18 +20,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.example.ftcscoutingapp.ui.theme.FTCScoutingAppTheme
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainToResultsButton: Button
     private lateinit var mainToInputForm: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Utils.ftcApiHandlerInstance = runBlocking {
+            Utils.getFTCApiHandler(this@MainActivity)!!
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mainlayout)
 
-        lifecycleScope.launch {
-            Utils.ftcApiHandlerInstance = Utils.getFTCApiHandler(this@MainActivity)!!
-        }
 
         mainToResultsButton = findViewById(R.id.mainToResultsButton)
         mainToInputForm = findViewById(R.id.mainToInputButton)

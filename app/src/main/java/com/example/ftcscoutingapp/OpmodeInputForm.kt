@@ -85,8 +85,8 @@ class OpmodeInputForm : Fragment() {
                 everythingStringFunction,
                 matchResult
             ),
-            "Pattern Artifacts" to SingleInputModule(
-                "Pattern Artifacts",
+            "Artifacts Matching Pattern" to SingleInputModule(
+                "Artifacts Matching Pattern",
                 inflated.findViewById<Button>(R.id.inputFormOpModePatternArtifactsSubtractionButton),
                 inflated.findViewById<Button>(R.id.inputFormOpModePatternArtifactsAdditionButton),
                 inflated.findViewById<TextView>(R.id.inputFormOpModePatternArtifactsDisplay),

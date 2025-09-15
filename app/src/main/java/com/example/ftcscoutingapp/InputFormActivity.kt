@@ -266,13 +266,12 @@ class SingleInputModule(var methodName: String, subtractionButton: Button, addit
             field = min(max(value, minValue), maxValue).toLong()
             numberDisplay.text = "$value"
             if (isAutonomous) {
-                scoreDisplay.text = "Score: ${scoreCalculator(numberValue)}p (${2*scoreCalculator(numberValue)}p)"
-                matchResultToUpdate.autonomousScoringMethods.setValueOfMethod(methodName, scoreCalculator(numberValue).toString())
+                matchResultToUpdate.autonomousScoringMethods.setValueOfMethod(methodName, numberValue.toString())
             }
             else {
-                scoreDisplay.text = "Score: ${scoreCalculator(numberValue)}p"
-                matchResultToUpdate.teleopScoringMethods.setValueOfMethod(methodName, scoreCalculator(numberValue).toString())
+                matchResultToUpdate.teleopScoringMethods.setValueOfMethod(methodName, numberValue.toString())
             }
+            scoreDisplay.text = scoreStringProcessor(scoreCalculator(numberValue))
         }
     init {
         numberValue = initialValue

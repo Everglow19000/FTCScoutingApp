@@ -10,9 +10,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
 
 class AutonomousInputForm : Fragment() {
-    private lateinit var didLeaveSwitch: Switch
+    private lateinit var didLeaveSwitch: SwitchCompat
     public lateinit var matchResult: MatchResults
     private lateinit var inputModulesMap: MutableMap<String, SingleInputModule>
     override fun onCreateView(
@@ -23,7 +24,9 @@ class AutonomousInputForm : Fragment() {
         var inflated = inflater.inflate(R.layout.fragment_autonomous_input_form, container, false)
 
         didLeaveSwitch = inflated.findViewById(R.id.inputFormAutonomousDidLeaveSwitch)
-
+        didLeaveSwitch.setOnCheckedChangeListener { _, isChecked ->
+            matchResult.autonomousScoringMethods.setValueOfMethod("Did Leave", isChecked.toString())
+        }
 
         var classifiedArtifactsFunction = { count: Long -> 3*count }
         var overflowArtifactsFunction = { count: Long -> 1*count }
@@ -54,8 +57,8 @@ class AutonomousInputForm : Fragment() {
                 everythingStringFunction,
                 matchResult
             ),
-            "Pattern Artifacts" to SingleInputModule(
-                "Pattern Artifacts",
+            "Artifacts Matching Pattern" to SingleInputModule(
+                "Artifacts Matching Pattern",
                 inflated.findViewById<Button>(R.id.inputFormAutonomousPatternArtifactsSubtractionButton),
                 inflated.findViewById<Button>(R.id.inputFormAutonomousPatternArtifactsAdditionButton),
                 inflated.findViewById<TextView>(R.id.inputFormAutonomousPatternArtifactsDisplay),
